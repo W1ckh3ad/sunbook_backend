@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import de.sunbook.api.services.MyUserDetailsService;
 import de.sunbook.api.utils.JwtUtil;
 
 import java.util.ArrayList;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/account")
@@ -43,17 +47,15 @@ public class AccountController {
         return ResponseEntity.ok(new AuthenticationResponseModel(jwt));
     }
 
-    @RequestMapping(value = "/authenticate/test", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createAuthenticationToken() throws Exception {
-        AuthenticationRequestModel request = new AuthenticationRequestModel("user", "password");
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or passowrd", e);
-        }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponseModel(jwt));
+    @GetMapping(value = "/")
+    public ResponseEntity<?> getUserData() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok(auth);
     }
+
+    @GetMapping(value = "/test/jwt")
+    public ResponseEntity<?> getMethodName(@RequestParam String jwt) {
+        return ResponseEntity.ok(jwtTokenUtil.extractUsername(jwt));
+    }
+
 }
