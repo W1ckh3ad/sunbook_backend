@@ -56,4 +56,9 @@ public class BookProcessor extends Processor implements ICrudProcessor<BookModel
         String sql = sqlStringBuilder.select(model);
         return connection.query(sql, CustomRowMapper.GetBookMapper());
     }
+
+    public BookModel getIsbn(String isbn) throws SQLException {
+        String sql = sqlStringBuilder.selectIsbn(isbn);
+        return connection.querySingle(sql, CustomRowMapper.GetBookMapper());
+    }
 }

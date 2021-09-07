@@ -78,4 +78,8 @@ public class BookSqlStringBuilder extends SqlStringBuilder {
     public String select(BookQueryModel model) {
         return select() + getBookQueryModelWhereClause(model);
     }
+
+    public String selectIsbn(String isbn) {
+        return select() + WHERE + wrap("isbn") + EQUALS + stringValue(isbn);
+    }
 }

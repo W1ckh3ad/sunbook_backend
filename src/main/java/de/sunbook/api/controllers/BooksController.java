@@ -50,8 +50,8 @@ public class BooksController {
         @GetMapping("/isbn/{isbn}")
         @Operation(description = "Search for a Title, Subtitle, Author or ISBM", parameters = {
                         @Parameter(name = "isbn", example = "978-3-442-31448-5") })
-        public List<BookModel> getSingleIsbn(@PathVariable String isbn) throws SQLException {
-                return null;
+        public BookModel getSingleIsbn(@PathVariable String isbn) throws SQLException {
+                return bookService.getIsbn(isbn);
         }
 
         @PostMapping

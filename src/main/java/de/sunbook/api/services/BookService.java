@@ -31,6 +31,10 @@ public class BookService {
         return bookProcessor.get(id);
     }
 
+    public BookModel getIsbn(String isbn) throws SQLException {
+        return bookProcessor.getIsbn(isbn);
+    }
+
     public void put(int id, BookModel model) throws SQLException {
         model.setUid(id);
         bookProcessor.put(model);
