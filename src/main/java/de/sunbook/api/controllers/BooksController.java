@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,8 +51,8 @@ public class BooksController {
         @GetMapping("/isbn/{isbn}")
         @Operation(description = "Search for a Title, Subtitle, Author or ISBM", parameters = {
                         @Parameter(name = "isbn", example = "978-3-442-31448-5") })
-        public BookModel getSingleIsbn(@PathVariable String isbn) throws SQLException {
-                return bookService.getIsbn(isbn);
+        public ResponseEntity<?> getSingleIsbn(@PathVariable String isbn) throws SQLException {
+                return ResponseEntity.ok(bookService.getIsbn(isbn));
         }
 
         @PostMapping

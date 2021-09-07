@@ -32,7 +32,10 @@ public class BookService {
     }
 
     public BookModel getIsbn(String isbn) throws SQLException {
-        return bookProcessor.getIsbn(isbn);
+        BookModel model = bookProcessor.getIsbn(isbn);
+        var list = userBookMapProcessor.getShopsForBook(model.getUid());
+        var response = new BookResponseSingleModel(model, list);
+        return response;
     }
 
     public void put(int id, BookModel model) throws SQLException {
