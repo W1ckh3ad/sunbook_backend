@@ -37,12 +37,6 @@ public class SqlServerConnection {
         con.execute(sql);
     }
 
-    public int insertAndGetId(String sql) throws SQLException {
-        JdbcTemplate con = getConnection();
-        con.execute(sql);
-        return 1;
-    }
-
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
         JdbcTemplate con = getConnection();
         return con.query(sql, rowMapper);

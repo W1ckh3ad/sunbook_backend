@@ -1,8 +1,13 @@
 package de.sunbook.api.utils.sqlstringbuilder.abstracts;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import de.sunbook.api.models.requestmodels.BookQueryModel;
 
 public class SqlStringBuilder {
     protected String table;
@@ -26,6 +31,10 @@ public class SqlStringBuilder {
 
     protected String wrap(String s) {
         return " `" + s + "` ";
+    }
+
+    protected String wrap(String s, String table) {
+        return " " + table + ".`" + s + "` ";
     }
 
     protected List<String> wrap(List<String> columns) {
@@ -59,8 +68,8 @@ public class SqlStringBuilder {
     protected String insertHelper(Map<String, String> map) {
         List<String> cols = new ArrayList<String>(map.keySet());
         List<String> values = new ArrayList<String>(map.values());
-        return INSERT + table + OPEN + String.join(", ", wrap(cols)) + CLOSE + "VALUES " + OPEN + stringValue(values)
-                + CLOSE;
+        return INSERT + table + OPEN + String.join(", ", wrap(cols)) + CLOSE + "VALUES " + OPEN
+                + String.join(", ", stringValue(values)) + CLOSE;
     }
 
     protected String updateHelper(Map<String, String> map, String uid) {
@@ -78,5 +87,42 @@ public class SqlStringBuilder {
 
     public String delete(String value) {
         return DELETE + table + WHERE + wrap(keyColumn) + EQUALS + stringValue(value);
+    }
+
+    protected String DateTimeToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        var dateString = dateFormat.format(date);
+        return " STR_TO_DATE('" + dateString + "', '%Y-%m-%d %H:%M:%s')";
+    }
+
+    protected String DateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        var dateString = dateFormat.format(date);
+        return " STR_TO_DATE('" + dateString + "', '%Y-%m-%d')";
+    }
+
+    protected String getBookQueryModelWhereClause(BookQueryModel model) {
+        String genre = model.getGenre();
+        String binding = model.getBinding();
+        Float maxPrice = model.getMaxPrice();
+        Float minPrice = model.getMinPrice();
+        var parts = new ArrayList<String>();
+        if (maxPrice != null && minPrice != null) {
+            parts.add(" price between " + minPrice + " and " + maxPrice + " ");
+        } else {
+            if (minPrice != null) {
+                parts.add(" price >= " + minPrice + " ");
+            }
+            if (maxPrice != null) {
+                parts.add(" price >= " + maxPrice + " ");
+            }
+        }
+        if (binding != null) {
+            parts.add(" binding = " + stringValue(binding) + " ");
+        }
+        if (genre != null) {
+            parts.add(" genre = " + stringValue(genre) + " ");
+        }
+        return parts.size() > 0 ? WHERE + String.join(" AND ", parts) : "";
     }
 }

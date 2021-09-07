@@ -1,4 +1,4 @@
-package de.sunbook.api.models;
+package de.sunbook.api.models.tablemodels;
 
 public class UserModel {
     private Integer userId;
@@ -9,15 +9,18 @@ public class UserModel {
     private String houseNum;
     private String plz;
     private String role;
+    private String city;
     private String password;
     private String favPayment;
-    private boolean isActive;
+    private Boolean isActive;
+    private String shopName;
 
     public UserModel() {
     }
 
     public UserModel(Integer userId, String firstName, String lastName, String email, String street, String houseNum,
-            String plz, String role, String password, String favPayment, boolean isActive) {
+            String plz, String role, String city, String password, String favPayment, boolean isActive,
+            String shopName) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,9 +29,11 @@ public class UserModel {
         this.houseNum = houseNum;
         this.plz = plz;
         this.role = role;
+        this.city = city;
         this.password = password;
         this.favPayment = favPayment;
         this.isActive = isActive;
+        this.shopName = shopName;
     }
 
     public Integer getUserId() {
@@ -95,6 +100,14 @@ public class UserModel {
         this.role = role;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -111,11 +124,20 @@ public class UserModel {
         this.favPayment = favPayment;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean isActive) {
+    public void setActive(Boolean isActive) {
         this.isActive = isActive;
     }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
 }

@@ -1,9 +1,9 @@
-package de.sunbook.api.models;
+package de.sunbook.api.models.tablemodels;
 
 public class UserBookMapModel {
     private Integer uid;
     private Integer userId;
-    private String description;
+    private String userDescription;
 
     public UserBookMapModel() {
     }
@@ -11,7 +11,7 @@ public class UserBookMapModel {
     public UserBookMapModel(Integer uid, Integer userId, String description) {
         this.uid = uid;
         this.userId = userId;
-        this.description = description;
+        this.userDescription = description;
     }
 
     public Integer getUid() {
@@ -31,10 +31,10 @@ public class UserBookMapModel {
     }
 
     public String getDescription() {
-        return description;
+        return userDescription;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.userDescription = description;
     }
 }

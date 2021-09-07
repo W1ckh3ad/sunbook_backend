@@ -1,4 +1,4 @@
-package de.sunbook.api.models;
+package de.sunbook.api.models.tablemodels;
 
 import java.util.Date;
 

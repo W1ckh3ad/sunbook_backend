@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.sunbook.api.models.AuthenticationRequestModel;
+import de.sunbook.api.models.requestmodels.AuthenticationRequestModel;
 
 @RestController
 public class HelloController {
@@ -18,6 +18,6 @@ public class HelloController {
 
     @PostMapping("/post")
     public ResponseEntity<?> post(@RequestBody AuthenticationRequestModel request) {
-        return ResponseEntity.ok("Hello Post");
+        return ResponseEntity.ok("Hello post");
     }
 }

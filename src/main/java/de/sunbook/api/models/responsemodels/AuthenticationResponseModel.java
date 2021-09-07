@@ -1,4 +1,4 @@
-package de.sunbook.api.models;
+package de.sunbook.api.models.responsemodels;
 
 public class AuthenticationResponseModel {
     private final String jwt;

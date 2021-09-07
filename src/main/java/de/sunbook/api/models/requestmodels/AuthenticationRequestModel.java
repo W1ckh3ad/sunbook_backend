@@ -1,4 +1,4 @@
-package de.sunbook.api.models;
+package de.sunbook.api.models.requestmodels;
 
 public class AuthenticationRequestModel {
     private String username;

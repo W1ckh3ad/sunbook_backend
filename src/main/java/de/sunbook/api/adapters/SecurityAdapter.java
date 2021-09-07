@@ -31,14 +31,11 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-        .authorizeRequests()
-            .antMatchers("/api/account/authenticate", "/api/books/**").permitAll()
-            .antMatchers("/api/admin/**").hasRole("admin")
-            .anyRequest().authenticated()
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/api/account/authenticate", "/api/account/register", "/api/books/**", "/api/sellers/**",
+                        "/swagger-ui/*")
+                .permitAll().antMatchers("/api/admin/**").hasRole("admin").anyRequest().authenticated().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

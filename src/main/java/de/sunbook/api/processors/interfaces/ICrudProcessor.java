@@ -4,13 +4,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ICrudProcessor<TTableModel> {
-    List<TTableModel> Get() throws SQLException;
+    List<TTableModel> get() throws SQLException;
 
-    TTableModel Get(int uid) throws SQLException;
+    TTableModel get(int uid) throws SQLException;
 
-    int Post(TTableModel model) throws SQLException;
+    void post(TTableModel model) throws SQLException;
 
-    void Put(TTableModel model) throws SQLException;
+    void put(TTableModel model) throws SQLException;
 
-    void Delete(int uid) throws SQLException;
+    void delete(int uid) throws SQLException;
 }
