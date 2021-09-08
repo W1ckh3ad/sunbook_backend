@@ -30,11 +30,12 @@ public class UserBookMapModel {
         this.userId = userId;
     }
 
-    public String getDescription() {
+    public String getUserDescription() {
         return userDescription;
     }
 
-    public void setDescription(String description) {
-        this.userDescription = description;
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
     }
+
 }

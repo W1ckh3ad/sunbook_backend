@@ -22,19 +22,19 @@ public class UserProcessor extends Processor implements ICrudProcessor<UserModel
 
     @Override
     public void delete(int uid) throws SQLException {
-        String sql = sqlStringBuilder.delete(String.valueOf(uid));
+        String sql = sqlStringBuilder.delete(uid);
         connection.execute(sql);
     }
 
     @Override
-    public List<UserModel> get() throws SQLException {
+    public List<UserModel> select() throws SQLException {
         String sql = sqlStringBuilder.select();
         return connection.query(sql, CustomRowMapper.GetUserMapper());
     }
 
     @Override
-    public UserModel get(int uid) throws SQLException {
-        String sql = sqlStringBuilder.select(String.valueOf(uid));
+    public UserModel select(int uid) throws SQLException {
+        String sql = sqlStringBuilder.select(uid);
         return connection.querySingle(sql, CustomRowMapper.GetUserMapper());
     }
 
@@ -44,24 +44,24 @@ public class UserProcessor extends Processor implements ICrudProcessor<UserModel
     }
 
     @Override
-    public void post(UserModel model) throws SQLException {
+    public void insert(UserModel model) throws SQLException {
         String sql = sqlStringBuilder.insertAll(model);
         connection.execute(sql);
     }
 
     @Override
-    public void put(UserModel model) throws SQLException {
+    public void update(UserModel model) throws SQLException {
         String sql = sqlStringBuilder.update(model);
         connection.execute(sql);
     }
 
-    public UserModel getUsername(String usernameOrEmail) throws SQLException {
+    public UserModel selectUsername(String usernameOrEmail) throws SQLException {
         String sql = sqlStringBuilder.getUsername(usernameOrEmail);
         return connection.querySingle(sql, CustomRowMapper.GetUserMapper());
     }
 
-    public UserModel getSeller(int id) throws SQLException {
-        String sql = sqlStringBuilder.select(String.valueOf(id)) + " AND `role` IN ('admin', 'seller')";
+    public UserModel selectSeller(int id) throws SQLException {
+        String sql = sqlStringBuilder.select(id) + " AND `role` IN ('admin', 'seller')";
         return connection.querySingle(sql, CustomRowMapper.GetUserMapper());
     }
 }

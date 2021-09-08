@@ -9,6 +9,7 @@ import de.sunbook.api.models.responsemodels.BookResponseModel;
 import de.sunbook.api.models.responsemodels.UserBookModelForBookResponseSingleModel;
 import de.sunbook.api.models.responsemodels.UserReponseForShopsModel;
 import de.sunbook.api.models.tablemodels.BookModel;
+import de.sunbook.api.models.tablemodels.UserBookMapModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 
 public class CustomRowMapper {
@@ -56,7 +57,7 @@ public class CustomRowMapper {
         };
     }
 
-    public static RowMapper<BookResponseModel> GetUserBookMapRowMapper() {
+    public static RowMapper<BookResponseModel> GetBookResponseModelRowMapper() {
         return new RowMapper<BookResponseModel>() {
             @Override
             public BookResponseModel mapRow(ResultSet result, int rowNum) throws SQLException {
@@ -135,6 +136,20 @@ public class CustomRowMapper {
                 user.setRole(result.getString("role"));
                 user.setShopName(result.getString("shopName"));
                 book.setUser(user);
+                return book;
+            }
+        };
+    }
+
+    public static RowMapper<UserBookMapModel> GetUserBookMapModelRowMapper() {
+        return new RowMapper<UserBookMapModel>() {
+            @Override
+            public UserBookMapModel mapRow(ResultSet result, int rowNum) throws SQLException {
+                UserBookMapModel book = new UserBookMapModel();
+
+                book.setUserDescription(result.getString("userDescription"));
+                book.setUid(result.getInt("uid"));
+                book.setUserId(result.getInt("userId"));
                 return book;
             }
         };

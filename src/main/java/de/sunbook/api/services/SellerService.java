@@ -18,7 +18,7 @@ public class SellerService {
     private UserProcessor userProcessor;
     
     public SellerResponseModel getSeller(int id) throws SQLException {
-        var model = userProcessor.getSeller(id);
+        var model = userProcessor.selectSeller(id);
         var list = bookService.getBooksForUser(id);
         return new SellerResponseModel(model, list);
     }

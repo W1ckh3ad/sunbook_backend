@@ -23,6 +23,7 @@ public class SqlStringBuilder {
     protected final String EQUALS = " = ";
     protected final String OPEN = " ( ";
     protected final String CLOSE = " ) ";
+    protected final String AND = " AND ";
 
     public SqlStringBuilder(String table, String keyColumn) {
         this.table = wrap(table);
@@ -47,6 +48,10 @@ public class SqlStringBuilder {
 
     protected String stringValue(String s) {
         return " '" + s + "' ";
+    }
+
+    protected String stringValue(int s) {
+        return " '" + String.valueOf(s) + "' ";
     }
 
     protected List<String> stringValue(List<String> columns) {
@@ -81,12 +86,12 @@ public class SqlStringBuilder {
         return SELECT + EVERYTHING + FROM + table;
     }
 
-    public String select(String value) {
-        return select() + WHERE + wrap(keyColumn) + EQUALS + stringValue(value);
+    public String select(int id) {
+        return select() + WHERE + wrap(keyColumn) + EQUALS + stringValue(id);
     }
 
-    public String delete(String value) {
-        return DELETE + table + WHERE + wrap(keyColumn) + EQUALS + stringValue(value);
+    public String delete(int id) {
+        return DELETE + table + WHERE + wrap(keyColumn) + EQUALS + stringValue(id);
     }
 
     protected String DateTimeToString(Date date) {

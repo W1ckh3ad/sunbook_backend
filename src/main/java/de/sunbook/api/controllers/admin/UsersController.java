@@ -1,9 +1,10 @@
-package de.sunbook.api.controllers;
+package de.sunbook.api.controllers.admin;
 
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,15 +34,21 @@ public class UsersController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> put(@PathVariable int id, @RequestBody UserModel model) throws SQLException {
+    public ResponseEntity<?> put(@PathVariable int id, @RequestBody UserModel model) throws SQLException, Exception {
         userService.put(id, model);
         return ResponseEntity.ok("User " + model.getEmail() + " has been updated");
     }
 
     @PostMapping()
-    public ResponseEntity<?> post(@RequestBody UserModel model) throws SQLException {
+    public ResponseEntity<?> post(@RequestBody UserModel model) throws SQLException, Exception {
         userService.post(model);
         return ResponseEntity.ok("User " + model.getEmail() + " has registered");
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id) throws SQLException {
+        userService.delete(id);
+        return ResponseEntity.ok("User " + id + " has been removed");
     }
 
 }

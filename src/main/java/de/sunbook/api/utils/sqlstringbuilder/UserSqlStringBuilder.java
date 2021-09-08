@@ -28,12 +28,8 @@ public class UserSqlStringBuilder extends SqlStringBuilder {
 
     public String update(UserModel model) {
 
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = getMap(model);
         return updateHelper(map, String.valueOf(model.getUserId()));
-    }
-
-    public String checkLogin() {
-        return "";
     }
 
     public String getUsername(String email) {

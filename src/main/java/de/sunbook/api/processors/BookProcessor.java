@@ -23,41 +23,41 @@ public class BookProcessor extends Processor implements ICrudProcessor<BookModel
 
     @Override
     public void delete(int uid) throws SQLException {
-        String sql = sqlStringBuilder.delete(String.valueOf(uid));
+        String sql = sqlStringBuilder.delete(uid);
         connection.execute(sql);
     }
 
     @Override
-    public List<BookModel> get() throws SQLException {
+    public List<BookModel> select() throws SQLException {
         String sql = sqlStringBuilder.select();
         return connection.query(sql, CustomRowMapper.GetBookMapper());
     }
 
     @Override
-    public BookModel get(int uid) throws SQLException {
-        String sql = sqlStringBuilder.select(String.valueOf(uid));
+    public BookModel select(int uid) throws SQLException {
+        String sql = sqlStringBuilder.select(uid);
         return connection.querySingle(sql, CustomRowMapper.GetBookMapper());
     }
 
     @Override
-    public void post(BookModel model) throws SQLException {
+    public void insert(BookModel model) throws SQLException {
         String sql = sqlStringBuilder.insert(model);
         connection.execute(sql);
 
     }
 
     @Override
-    public void put(BookModel model) throws SQLException {
+    public void update(BookModel model) throws SQLException {
         String sql = sqlStringBuilder.update(model);
         connection.execute(sql);
     }
 
-    public List<BookModel> get(BookQueryModel model) throws SQLException {
+    public List<BookModel> select(BookQueryModel model) throws SQLException {
         String sql = sqlStringBuilder.select(model);
         return connection.query(sql, CustomRowMapper.GetBookMapper());
     }
 
-    public BookModel getIsbn(String isbn) throws SQLException {
+    public BookModel select(String isbn) throws SQLException {
         String sql = sqlStringBuilder.selectIsbn(isbn);
         return connection.querySingle(sql, CustomRowMapper.GetBookMapper());
     }
