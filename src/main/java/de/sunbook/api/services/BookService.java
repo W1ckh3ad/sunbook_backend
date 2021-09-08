@@ -116,4 +116,9 @@ public class BookService {
         userBookMapProcessor.update(model);
     }
 
+    public BookResponseModel getBookToSell(String username, int id) throws SQLException {
+        var user = userProcessor.selectUsername(username);
+        return userBookMapProcessor.selectBookForUserId(user.getUserId(), id);
+    }
+
 }

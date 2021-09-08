@@ -29,6 +29,8 @@ public class CustomRowMapper {
                 user.setPassword(result.getString("password"));
                 user.setFavPayment(result.getString("favPayment"));
                 user.setActive(result.getBoolean("isActive"));
+                user.setCity(result.getString("city"));
+                user.setShopName(result.getString("shopName"));
                 return user;
             }
         };
@@ -87,6 +89,7 @@ public class CustomRowMapper {
                 user.setPlz(result.getString("plz"));
                 user.setRole(result.getString("role"));
                 user.setShopName(result.getString("shopName"));
+                user.setCity(result.getString("city"));
                 book.setOwner(user);
                 return book;
             }
@@ -135,6 +138,7 @@ public class CustomRowMapper {
                 user.setPlz(result.getString("plz"));
                 user.setRole(result.getString("role"));
                 user.setShopName(result.getString("shopName"));
+                user.setCity(result.getString("city"));
                 book.setUser(user);
                 return book;
             }

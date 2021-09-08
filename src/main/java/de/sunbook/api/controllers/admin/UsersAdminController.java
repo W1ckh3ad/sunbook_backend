@@ -18,7 +18,7 @@ import de.sunbook.api.services.UserService;
 
 @RestController
 @RequestMapping("/api/admin/users")
-public class UsersController {
+public class UsersAdminController {
 
     @Autowired
     private UserService userService;
@@ -34,13 +34,20 @@ public class UsersController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> put(@PathVariable int id, @RequestBody UserModel model) throws SQLException, Exception {
+    public ResponseEntity<?> put(@PathVariable int id, @RequestBody(required = true) UserModel model)
+            throws SQLException, Exception {
+        if (model == null) {
+            throw new Exception("Request body missing");
+        }
         userService.put(id, model);
         return ResponseEntity.ok("User " + model.getEmail() + " has been updated");
     }
 
     @PostMapping()
-    public ResponseEntity<?> post(@RequestBody UserModel model) throws SQLException, Exception {
+    public ResponseEntity<?> post(@RequestBody(required = true) UserModel model) throws SQLException, Exception {
+        if (model == null) {
+            throw new Exception("Request body missing");
+        }
         userService.post(model);
         return ResponseEntity.ok("User " + model.getEmail() + " has registered");
     }

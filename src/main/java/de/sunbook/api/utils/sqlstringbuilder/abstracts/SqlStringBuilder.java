@@ -15,7 +15,7 @@ public class SqlStringBuilder {
     protected final String SELECT = " SELECT ";
     protected final String FROM = " FROM ";
     protected final String INSERT = " INSERT INTO ";
-    protected final String DELETE = " DELETE ";
+    protected final String DELETE = " DELETE " + FROM;
     protected final String UPDATE = " UPDATE ";
     protected final String SET = " SET ";
     protected final String WHERE = " WHERE ";
@@ -65,7 +65,7 @@ public class SqlStringBuilder {
     protected String setStringBuilder(Map<String, String> map) {
         List<String> sets = new ArrayList<>();
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            sets.add(wrap(entry.getKey()) + EQUALS + stringValue(entry.getValue()));
+            sets.add(wrap(entry.getKey()) + EQUALS + entry.getValue());
         }
         return String.join(", ", sets);
     }
@@ -74,11 +74,11 @@ public class SqlStringBuilder {
         List<String> cols = new ArrayList<String>(map.keySet());
         List<String> values = new ArrayList<String>(map.values());
         return INSERT + table + OPEN + String.join(", ", wrap(cols)) + CLOSE + "VALUES " + OPEN
-                + String.join(", ", stringValue(values)) + CLOSE;
+                + String.join(", ", values) + CLOSE;
     }
 
     protected String updateHelper(Map<String, String> map, String uid) {
-        return UPDATE + table + String.join(", ", setStringBuilder(map)) + WHERE + keyColumn + EQUALS
+        return UPDATE + table + SET + String.join(", ", setStringBuilder(map)) + WHERE + keyColumn + EQUALS
                 + stringValue(uid);
     }
 
@@ -101,7 +101,7 @@ public class SqlStringBuilder {
     }
 
     protected String DateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         var dateString = dateFormat.format(date);
         return " STR_TO_DATE('" + dateString + "', '%Y-%m-%d')";
     }

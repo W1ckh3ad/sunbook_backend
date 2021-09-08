@@ -53,41 +53,48 @@ public class UserSqlStringBuilder extends SqlStringBuilder {
         String street = model.getStreet();
         String city = model.getCity();
         Boolean isActive = model.isActive();
+        String shopName = model.getShopName();
 
         if (firstName != null) {
-            map.put("firstName", firstName);
+            map.put("firstName", stringValue(firstName));
         }
         if (lastName != null) {
-            map.put("lastName", lastName);
+            map.put("lastName", stringValue(lastName));
         }
         if (email != null) {
-            map.put("email", email);
+            map.put("email", stringValue(email));
         }
         if (street != null) {
-            map.put("street", street);
+            map.put("street", stringValue(street));
         }
         if (password != null) {
-            map.put("password", password);
+            map.put("password", stringValue(password));
         }
         if (favPayment != null) {
-            map.put("favPayment", favPayment);
+            map.put("favPayment", stringValue(favPayment));
         }
         if (houseNum != null) {
-            map.put("houseNum", houseNum);
+            map.put("houseNum", stringValue(houseNum));
         }
         if (plz != null) {
-            map.put("plz", plz);
+            map.put("plz", stringValue(plz));
         }
         if (city != null) {
-            map.put("city", city);
+            map.put("city", stringValue(city));
         }
         if (role != null) {
-            map.put("role", role);
+            map.put("role", stringValue(role));
+        }
+        if (shopName != null) {
+            map.put("shopName", stringValue(shopName));
         }
         if (isActive != null) {
-            map.put("isActive", isActive ? "1" : "0");
+            map.put("isActive", isActive ? stringValue("1") : stringValue("0"));
         } else {
-            map.put("isActive", "0");
+            map.put("isActive", stringValue("0"));
+        }
+        if (map.size() == 1) {
+            throw new Error("Invalid Request Body");
         }
         return map;
     }

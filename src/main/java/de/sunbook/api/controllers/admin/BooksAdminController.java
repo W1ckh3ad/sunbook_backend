@@ -3,6 +3,7 @@ package de.sunbook.api.controllers.admin;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,26 +24,37 @@ public class BooksAdminController {
     private BookService bookService;
 
     @PostMapping
-    public void post(@RequestBody BookModel model) throws SQLException {
+    public ResponseEntity<?> post(@RequestBody(required = true) BookModel model) throws SQLException, Exception {
+        if (model == null) {
+            throw new Exception("Request body missing");
+        }
         bookService.post(model);
-        return;
+        return ResponseEntity.ok("Book was added successfully");
     }
 
     @PutMapping("/{id}")
-    public void put(@PathVariable int id, @RequestBody BookModel model) throws SQLException {
+    public ResponseEntity<?> put(@PathVariable int id, @RequestBody(required = true) BookModel model)
+            throws SQLException, Exception {
+        if (model == null) {
+            throw new Exception("Request body missing");
+        }
         bookService.put(id, model);
-        return;
+        return ResponseEntity.ok("Book was updated successfully");
     }
 
     @PatchMapping("/{id}")
-    public void patch(@PathVariable int id, @RequestBody BookModel model) throws SQLException {
+    public ResponseEntity<?> patch(@PathVariable int id, @RequestBody(required = true) BookModel model)
+            throws SQLException, Exception {
+        if (model == null) {
+            throw new Exception("Request updated missing");
+        }
         bookService.patch(id, model);
-        return;
+        return ResponseEntity.ok("Book was added successfully");
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) throws SQLException {
+    public ResponseEntity<?> delete(@PathVariable int id) throws SQLException {
         bookService.delete(id);
-        return;
+        return ResponseEntity.ok("Book was removed successfully");
     }
 }

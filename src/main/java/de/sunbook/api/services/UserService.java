@@ -85,7 +85,7 @@ public class UserService {
     }
 
     public void updateSelf(UserModel model, String username) throws SQLException, Exception {
-        var user = findUserByName(model.getEmail());
+        var user = findUserByName(username);
         int id = user.getUserId();
         var oldMail = user.getEmail();
         var newMail = model.getEmail();

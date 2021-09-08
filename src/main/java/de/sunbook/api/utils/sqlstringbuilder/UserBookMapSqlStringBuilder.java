@@ -11,7 +11,7 @@ public class UserBookMapSqlStringBuilder extends SqlStringBuilder {
     private final String baseSql = "SELECT * FROM UserMapBook LEFT JOIN BOOK ON BOOK.uid = UserMapBook.uid LEFT JOIN USERS ON USERS.userID = UserMapBook.userID";
 
     public UserBookMapSqlStringBuilder() {
-        super("UserBookMap", "keyColumn");
+        super("UserMapBook", "keyColumn");
     }
 
     public String select(BookQueryModel model) {
@@ -19,11 +19,16 @@ public class UserBookMapSqlStringBuilder extends SqlStringBuilder {
     }
 
     public String selectWithUsername(String username) {
-        return baseSql + WHERE + wrap("userDescription", "USERS") + EQUALS + stringValue(username);
+        return baseSql + WHERE + wrap("email", "USERS") + EQUALS + stringValue(username);
     }
 
     public String selectWithUserId(int id) {
         return baseSql + WHERE + wrap("userId", "USERS") + EQUALS + stringValue(id);
+    }
+
+    public String selectWithUserIdAndBookId(int id, int bookId) {
+        return baseSql + WHERE + wrap("userId", "USERS") + EQUALS + stringValue(id) + AND + wrap("uid", "BOOK") + EQUALS
+                + stringValue(bookId);
     }
 
     public String selectWithBook(int id) {
@@ -43,7 +48,7 @@ public class UserBookMapSqlStringBuilder extends SqlStringBuilder {
     }
 
     public String update(UserBookMapModel model) {
-        return UPDATE + table + SET + wrap("userDescription") + stringValue(model.getUserDescription())
+        return UPDATE + table + SET + wrap("userDescription") + EQUALS + stringValue(model.getUserDescription())
                 + getWhereString(model.getUid(), model.getUserId());
     }
 
@@ -53,12 +58,12 @@ public class UserBookMapSqlStringBuilder extends SqlStringBuilder {
         int uid = model.getUid();
         int userId = model.getUserId();
 
-        map.put("userId", String.valueOf(userId));
+        map.put("userId", stringValue(userId));
 
         if (userDescription != null) {
-            map.put("userDescription", userDescription);
+            map.put("userDescription", stringValue(userDescription));
         }
-        map.put("uid", String.valueOf(uid));
+        map.put("uid", stringValue(uid));
 
         return map;
     }

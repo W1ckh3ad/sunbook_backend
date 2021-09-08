@@ -62,6 +62,11 @@ public class UserBookMapProcessor extends Processor {
         return connection.query(sql, CustomRowMapper.GetUserBookMapRowMapperWithoutUser());
     }
 
+    public BookResponseModel selectBookForUserId(int id, int bookId) throws SQLException {
+        var sql = sqlStringBuilder.selectWithUserIdAndBookId(id, bookId);
+        return connection.querySingle(sql, CustomRowMapper.GetUserBookMapRowMapperWithoutUser());
+    }
+
     public List<UserBookModelForBookResponseSingleModel> selectShopsForBook(int id) throws SQLException {
         var sql = sqlStringBuilder.selectWithBook(id);
         return connection.query(sql, CustomRowMapper.GetUserBookModelForBookResponseSingleModelRowMapp());
