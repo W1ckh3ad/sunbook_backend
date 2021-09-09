@@ -93,7 +93,7 @@ public class OrderService {
         }
         if (model.getVouchers() != null) {
             for (var voucher : model.getVouchers()) {
-                var voucherModel = voucherService.createCredit(voucher, user);
+                var voucherModel = voucherService.createGift(voucher, user);
                 codesToBuy.add(voucherModel);
             }
         }

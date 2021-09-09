@@ -14,6 +14,11 @@ import de.sunbook.api.processors.ExtraProductProcessor;
 
 @Service
 public class VoucherService {
+    /**
+     *
+     */
+    private static final String GESCHENKGUTSCHEIN = "Geschenkgutschein";
+
     @Autowired
     private UserService userService;
 
@@ -43,15 +48,25 @@ public class VoucherService {
     }
 
     public ExtraProductModel createCredit(CreateVoucherRequestModel request, String creator) throws Exception {
+        var id = request.getReceiverId();
+        var mail = request.getReceiverEmail();
+        if (id == null && mail == null) {
+            throw new Exception("Invalid Request Body");
+        }
+        if (id == null && mail != null) {
+            var user = userService.findUserByName(mail);
+            id = user.getUserId();
+        }
         return post(request, creator, "Gutschrift");
     }
 
-    public ExtraProductModel createCredit(CreateVoucherRequestModel request, UserModel creator) throws Exception {
-        return post(request, creator, "Gutschrift");
+    public ExtraProductModel createGift(CreateVoucherRequestModel request, UserModel creator) throws Exception {
+
+        return post(request, creator, GESCHENKGUTSCHEIN);
     }
 
-    public ExtraProductModel createGif(CreateVoucherRequestModel request, String creator) throws Exception {
-        return post(request, creator, "Geschenkgutschein");
+    public ExtraProductModel createGift(CreateVoucherRequestModel request, String creator) throws Exception {
+        return post(request, creator, GESCHENKGUTSCHEIN);
     }
 
     private ExtraProductModel post(CreateVoucherRequestModel request, String creator, String productName)
@@ -63,17 +78,10 @@ public class VoucherService {
     private ExtraProductModel post(CreateVoucherRequestModel request, UserModel creator, String productName)
             throws Exception {
         var id = request.getReceiverId();
-        var mail = request.getReceiverEmail();
         var value = request.getValue();
-        if (id == null && mail == null) {
-            throw new Exception("Invalid Request Body");
-        }
-        if (id == null && mail != null) {
-            var user = userService.findUserByName(mail);
-            id = user.getUserId();
-        }
         var created = new Date();
-        String codedString = id.toString() + String.valueOf(created.getTime()) + String.valueOf(value);
+        String codedString = creator.getUserId().toString() + String.valueOf(created.getTime()) + String.valueOf(value)
+                + new Date().getTime();
         var model = new ExtraProductModel();
         model.setCreatedAt(created);
         model.setCreator(creator.getUserId());
