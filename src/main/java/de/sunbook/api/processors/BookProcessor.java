@@ -40,9 +40,9 @@ public class BookProcessor extends Processor implements ICrudProcessor<BookModel
     }
 
     @Override
-    public void insert(BookModel model) throws SQLException {
+    public int insert(BookModel model) throws SQLException {
         String sql = sqlStringBuilder.insert(model);
-        connection.execute(sql);
+        return connection.insertAndGetId(sql);
 
     }
 

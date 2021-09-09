@@ -76,12 +76,16 @@ public class UserService {
         userProcessor.update(model);
     }
 
-    public void post(UserModel model) throws SQLException, Exception {
+    public UserModel post(UserModel model) throws SQLException, Exception {
         var user = findUserByName(model.getEmail());
         if (user != null) {
             throw new Exception("There already exitsts a User with this email adress");
         }
-        userProcessor.insert(model);
+        var password = passwordEncoder.encode(model.getPassword());
+        model.setPassword(password);
+        var id = userProcessor.insert(model);
+        model.setUserId(id);
+        return model;
     }
 
     public void updateSelf(UserModel model, String username) throws SQLException, Exception {

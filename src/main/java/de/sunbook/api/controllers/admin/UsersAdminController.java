@@ -48,9 +48,10 @@ public class UsersAdminController {
         if (model == null) {
             throw new Exception("Request body missing");
         }
-        userService.post(model);
-        return ResponseEntity.ok("User " + model.getEmail() + " has registered");
+        var returnModel = userService.post(model);
+        return ResponseEntity.ok(returnModel);
     }
+
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) throws SQLException {

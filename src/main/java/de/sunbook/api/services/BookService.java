@@ -55,8 +55,10 @@ public class BookService {
         bookProcessor.update(model);
     }
 
-    public void post(BookModel model) throws SQLException {
-        bookProcessor.insert(model);
+    public BookModel post(BookModel model) throws SQLException {
+        var id = bookProcessor.insert(model);
+        model.setUid(id);
+        return model;
     }
 
     public void delete(int id) throws SQLException {

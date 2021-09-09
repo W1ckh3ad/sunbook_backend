@@ -37,9 +37,9 @@ public class UserBookMapProcessor extends Processor {
         return connection.querySingle(sql, CustomRowMapper.GetUserBookMapModelRowMapper());
     }
 
-    public void insert(UserBookMapModel model) throws SQLException {
+    public int insert(UserBookMapModel model) throws SQLException {
         var sql = sqlStringBuilder.insert(model);
-        connection.execute(sql);
+        return connection.insertAndGetId(sql);
     }
 
     public void update(UserBookMapModel model) throws SQLException {

@@ -44,9 +44,9 @@ public class UserProcessor extends Processor implements ICrudProcessor<UserModel
     }
 
     @Override
-    public void insert(UserModel model) throws SQLException {
+    public int insert(UserModel model) throws SQLException {
         String sql = sqlStringBuilder.insertAll(model);
-        connection.execute(sql);
+        return connection.insertAndGetId(sql);
     }
 
     @Override

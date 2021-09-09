@@ -28,8 +28,8 @@ public class BooksAdminController {
         if (model == null) {
             throw new Exception("Request body missing");
         }
-        bookService.post(model);
-        return ResponseEntity.ok("Book was added successfully");
+        var returnModel = bookService.post(model);
+        return ResponseEntity.ok(returnModel);
     }
 
     @PutMapping("/{id}")

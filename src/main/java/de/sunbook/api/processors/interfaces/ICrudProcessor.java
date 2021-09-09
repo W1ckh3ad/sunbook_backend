@@ -8,7 +8,7 @@ public interface ICrudProcessor<TTableModel> {
 
     TTableModel select(int uid) throws SQLException;
 
-    void insert(TTableModel model) throws SQLException;
+    int insert(TTableModel model) throws SQLException;
 
     void update(TTableModel model) throws SQLException;
 

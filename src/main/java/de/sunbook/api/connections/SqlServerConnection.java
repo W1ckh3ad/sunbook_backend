@@ -1,9 +1,15 @@
 package de.sunbook.api.connections;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
 import com.mysql.jdbc.Driver;
 
-import java.sql.SQLException;
-import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -32,9 +38,58 @@ public class SqlServerConnection {
         return new JdbcTemplate(dataSource);
     }
 
+    private Connection getConnectionNew() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(connectionString, user, password);
+        } catch (ClassNotFoundException e) {
+            System.out.println("ClassNotFoundException Occured...");
+        } catch (SQLException e) {
+            System.out.println("SQLException Occured...");
+        }
+        return connection;
+    }
+
     public void execute(String sql) throws SQLException {
         JdbcTemplate con = getConnection();
         con.execute(sql);
+    }
+
+    public int insertAndGetId(String sql) throws SQLException {
+        Connection connection = getConnectionNew();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        SQLException error = null;
+        try {
+            statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.executeUpdate();
+            rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                System.out.println("Auto Generated Primary Key " + id);
+                return id;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException Occured..");
+            error = e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close(); // close result set
+                }
+                if (statement != null) {
+                    statement.close(); // close statement
+                }
+                if (connection != null) {
+                    connection.close(); // close connection
+                }
+            } catch (SQLException e) {
+                System.out.println("SQLException Occured..");
+                throw e;
+            }
+        }
+        throw error;
     }
 
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
