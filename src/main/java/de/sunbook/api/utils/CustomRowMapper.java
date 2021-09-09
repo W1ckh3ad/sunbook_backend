@@ -9,6 +9,7 @@ import de.sunbook.api.models.responsemodels.BookResponseModel;
 import de.sunbook.api.models.responsemodels.UserBookModelForBookResponseSingleModel;
 import de.sunbook.api.models.responsemodels.UserReponseForShopsModel;
 import de.sunbook.api.models.tablemodels.BookModel;
+import de.sunbook.api.models.tablemodels.ExtraProductModel;
 import de.sunbook.api.models.tablemodels.UserBookMapModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 
@@ -155,6 +156,27 @@ public class CustomRowMapper {
                 book.setUid(result.getInt("uid"));
                 book.setUserId(result.getInt("userId"));
                 return book;
+            }
+        };
+    }
+
+    public static RowMapper<ExtraProductModel> GetExtraProductRowMapper() {
+        return new RowMapper<ExtraProductModel>() {
+            @Override
+            public ExtraProductModel mapRow(ResultSet result, int rowNum) throws SQLException {
+                ExtraProductModel model = new ExtraProductModel();
+
+                model.setCreatedAt(result.getDate("createdAt"));
+                model.setCreator(result.getInt("creator"));
+                model.setId(result.getInt("id"));
+                model.setPrice(result.getFloat("price"));
+                model.setProductCode(result.getString("productCode"));
+                model.setProductDescription(result.getString("productDescription"));
+                model.setProductName(result.getString("productName"));
+                model.setReceiver(result.getInt("receiver"));
+                model.setUsedAt(result.getDate("usedAt"));
+                model.setUsedIn(result.getInt("usedIn"));
+                return model;
             }
         };
     }

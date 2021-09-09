@@ -120,7 +120,11 @@ public class BookService {
 
     public BookResponseModel getBookToSell(String username, int id) throws SQLException {
         var user = userProcessor.selectUsername(username);
-        return userBookMapProcessor.selectBookForUserId(user.getUserId(), id);
+        return get(user.getUserId(), id);
+    }
+
+    public BookResponseModel get(int userId, int bookId) throws SQLException {
+        return userBookMapProcessor.selectBookForUserId(userId, bookId);
     }
 
 }

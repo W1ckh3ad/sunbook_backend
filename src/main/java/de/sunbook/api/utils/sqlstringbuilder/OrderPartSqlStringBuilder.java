@@ -18,9 +18,9 @@ public class OrderPartSqlStringBuilder extends SqlStringBuilder {
 
     private Map<String, String> getMap(OrderPartModel model) {
         Map<String, String> map = new HashMap<String, String>();
-        int orderId = model.getId();
+        int orderId = model.getOrderId();
         int bookId = model.getBookId();
-        int sellerId = model.getSellerId();
+        int sellerId = model.getUserId();
 
         map.put("orderId", stringValue(orderId));
         map.put("bookId", stringValue(bookId));

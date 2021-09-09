@@ -3,17 +3,19 @@ package de.sunbook.api.models.tablemodels;
 public class OrderPartModel {
     private int id;
     private int orderId;
-    private int bookId;
-    private int sellerId;
+    private Integer bookId;
+    private Integer userId;
+    private Integer extraProductId;
 
     public OrderPartModel() {
     }
 
-    public OrderPartModel(int id, int orderId, int bookId, int sellerId) {
+    public OrderPartModel(int id, int orderId, Integer bookId, Integer userId, Integer extraProductId) {
         this.id = id;
         this.orderId = orderId;
         this.bookId = bookId;
-        this.sellerId = sellerId;
+        this.userId = userId;
+        this.extraProductId = extraProductId;
     }
 
     public int getId() {
@@ -32,20 +34,28 @@ public class OrderPartModel {
         this.orderId = orderId;
     }
 
-    public int getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
-    public int getSellerId() {
-        return sellerId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getExtraProductId() {
+        return extraProductId;
+    }
+
+    public void setExtraProductId(Integer extraProductId) {
+        this.extraProductId = extraProductId;
     }
 
 }

@@ -58,7 +58,7 @@ public class BookSqlStringBuilder extends SqlStringBuilder {
             map.put("publisher", stringValue(publisher));
         }
         if (releaseDate != null) {
-            map.put("releaseDate", DateToString(releaseDate));
+            map.put("releaseDate", dateToString(releaseDate));
         }
         if (subtitle != null) {
             map.put("subtitle", stringValue(subtitle));

@@ -2,10 +2,13 @@ package de.sunbook.api.processors;
 
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
+
 import de.sunbook.api.models.tablemodels.OrderPartModel;
 import de.sunbook.api.processors.abstracts.Processor;
 import de.sunbook.api.utils.sqlstringbuilder.OrderPartSqlStringBuilder;
 
+@Service
 public class OrderPartProcessor extends Processor {
 
     OrderPartSqlStringBuilder sqlStringBuilder;

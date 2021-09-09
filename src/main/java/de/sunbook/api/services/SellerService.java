@@ -10,13 +10,13 @@ import de.sunbook.api.processors.UserProcessor;
 
 @Service
 public class SellerService {
-    
-@Autowired
+
+    @Autowired
     private BookService bookService;
 
     @Autowired
     private UserProcessor userProcessor;
-    
+
     public SellerResponseModel getSeller(int id) throws SQLException {
         var model = userProcessor.selectSeller(id);
         var list = bookService.getBooksForUser(id);

@@ -6,7 +6,7 @@ public class ExtraProductModel {
 
     private int id;
     private String productName;
-    private String prodcutCode;
+    private String productCode;
     private int creator;
     private Date createdAt;
     private Integer receiver;
@@ -18,11 +18,11 @@ public class ExtraProductModel {
     public ExtraProductModel() {
     }
 
-    public ExtraProductModel(int id, String productName, String prodcutCode, int creator, Date createdAt,
+    public ExtraProductModel(int id, String productName, String productCode, int creator, Date createdAt,
             Integer receiver, Float price, Integer usedIn, Date usedAt, String productDescription) {
         this.id = id;
         this.productName = productName;
-        this.prodcutCode = prodcutCode;
+        this.productCode = productCode;
         this.creator = creator;
         this.createdAt = createdAt;
         this.receiver = receiver;
@@ -48,12 +48,12 @@ public class ExtraProductModel {
         this.productName = productName;
     }
 
-    public String getProdcutCode() {
-        return prodcutCode;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setProdcutCode(String prodcutCode) {
-        this.prodcutCode = prodcutCode;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
     public int getCreator() {

@@ -50,8 +50,8 @@ public class SqlStringBuilder {
         return " '" + s + "' ";
     }
 
-    protected String stringValue(int s) {
-        return " '" + String.valueOf(s) + "' ";
+    protected String stringValue(Object s) {
+        return stringValue(String.valueOf(s));
     }
 
     protected List<String> stringValue(List<String> columns) {
@@ -89,18 +89,18 @@ public class SqlStringBuilder {
     public String select(int id) {
         return select() + WHERE + wrap(keyColumn) + EQUALS + stringValue(id);
     }
-
+   
     public String delete(int id) {
         return DELETE + table + WHERE + wrap(keyColumn) + EQUALS + stringValue(id);
     }
 
-    protected String DateTimeToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+    protected String dateTimeToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         var dateString = dateFormat.format(date);
-        return " STR_TO_DATE('" + dateString + "', '%Y-%m-%d %H:%M:%s')";
+        return " STR_TO_DATE('" + dateString + "',  '%Y-%m-%d %H:%i:%s')";
     }
 
-    protected String DateToString(Date date) {
+    protected String dateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         var dateString = dateFormat.format(date);
         return " STR_TO_DATE('" + dateString + "', '%Y-%m-%d')";
