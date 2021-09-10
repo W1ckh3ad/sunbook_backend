@@ -12,6 +12,10 @@ public class OrderPartSqlStringBuilder extends SqlStringBuilder {
         super(table, "id");
     }
 
+    public String selectOrderId(int orderId) {
+        return select() + WHERE + wrap("orderId") + EQUALS + stringValue(orderId);
+    }
+
     public String insert(OrderPartModel model) {
         return insertHelper(getMap(model));
     }
@@ -19,12 +23,20 @@ public class OrderPartSqlStringBuilder extends SqlStringBuilder {
     private Map<String, String> getMap(OrderPartModel model) {
         Map<String, String> map = new HashMap<String, String>();
         int orderId = model.getOrderId();
-        int bookId = model.getBookId();
-        int sellerId = model.getUserId();
-
+        Integer bookId = model.getBookId();
+        Integer sellerId = model.getUserId();
+        Integer extraProductId = model.getExtraProductId();
         map.put("orderId", stringValue(orderId));
-        map.put("bookId", stringValue(bookId));
-        map.put("userId", stringValue(sellerId));
+        if (bookId != null) {
+            map.put("bookId", stringValue(bookId));
+        }
+        if (sellerId != null) {
+            map.put("userId", stringValue(sellerId));
+        }
+        if (extraProductId != null) {
+            map.put("extraProductId", stringValue(extraProductId));
+        }
+
         return map;
     }
 }

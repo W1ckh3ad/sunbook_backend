@@ -38,6 +38,11 @@ public class ExtraProductProcessor extends Processor implements ICrudProcessor<E
         return connection.query(sql, CustomRowMapper.GetExtraProductRowMapper());
     }
 
+    public List<ExtraProductModel> selectUsedForOrderId(int id) throws SQLException {
+        var sql = sqlStringBuilder.selectUsedForOrderId(id);
+        return connection.query(sql, CustomRowMapper.GetExtraProductRowMapper());
+    }
+
     @Override
     public ExtraProductModel select(int uid) throws SQLException {
         var sql = sqlStringBuilder.select(uid);

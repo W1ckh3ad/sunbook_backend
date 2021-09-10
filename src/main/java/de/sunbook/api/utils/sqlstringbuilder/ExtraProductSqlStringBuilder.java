@@ -23,6 +23,10 @@ public class ExtraProductSqlStringBuilder extends SqlStringBuilder {
         return updateHelper(map, String.valueOf(model.getId()));
     }
 
+    public String selectUsedForOrderId(int id){
+        return select() + WHERE + wrap("usedIn") + EQUALS + stringValue(id);
+    }
+
     private Map<String, String> getMap(ExtraProductModel model) {
         Map<String, String> map = new HashMap<String, String>();
 

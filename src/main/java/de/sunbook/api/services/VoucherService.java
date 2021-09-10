@@ -33,6 +33,10 @@ public class VoucherService {
         return extraProductProcessor.select(id);
     }
 
+    public List<ExtraProductModel> getUsedForOrderId(int id) throws SQLException {
+        return extraProductProcessor.selectUsedForOrderId(id);
+    }
+
     public ExtraProductModel validateVoucher(String code, String username) throws SQLException, Exception {
         var user = userService.findUserByName(username);
         var model = extraProductProcessor.select(code);

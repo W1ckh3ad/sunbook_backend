@@ -12,20 +12,12 @@ public class OrderSqlStringBuilder extends SqlStringBuilder {
         super(table, "id");
     }
 
-    private final String baseSql = "";
-
     public String insert(OrderModel model) {
         return insertHelper(getMap(model));
     }
 
-    @Override
-    public String select() {
-        return baseSql;
-    }
-
-    @Override
-    public String select(int id) {
-        return baseSql + WHERE + wrap(keyColumn) + EQUALS + stringValue(id);
+    public String selectUserId(int userId) {
+        return select() + WHERE + wrap("userId") + EQUALS + stringValue(userId);
     }
 
     private Map<String, String> getMap(OrderModel model) {

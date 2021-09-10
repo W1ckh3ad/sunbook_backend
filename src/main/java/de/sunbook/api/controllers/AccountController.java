@@ -30,6 +30,7 @@ import de.sunbook.api.models.responsemodels.AuthenticationResponseModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 import de.sunbook.api.services.BookService;
 import de.sunbook.api.services.MyUserDetailsService;
+import de.sunbook.api.services.OrderService;
 import de.sunbook.api.services.UserService;
 import de.sunbook.api.utils.JwtUtil;
 
@@ -50,6 +51,9 @@ public class AccountController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody(required = true) AuthenticationRequestModel request)
@@ -165,6 +169,12 @@ public class AccountController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.updatePassword(model.getRole(), username);
         return ResponseEntity.ok("Role has been updated");
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<?> getOrders() throws SQLException{
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok(orderService.get(username));
     }
 
 }

@@ -31,7 +31,6 @@ public class ErrorController {
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<?> handleNullPointerException(NullPointerException e) {
-        return new ResponseEntity<String>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> handleNullPointerException(NullPointerException e) {        return new ResponseEntity<String>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -10,6 +10,8 @@ import de.sunbook.api.models.responsemodels.UserBookModelForBookResponseSingleMo
 import de.sunbook.api.models.responsemodels.UserReponseForShopsModel;
 import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.models.tablemodels.ExtraProductModel;
+import de.sunbook.api.models.tablemodels.OrderModel;
+import de.sunbook.api.models.tablemodels.OrderPartModel;
 import de.sunbook.api.models.tablemodels.UserBookMapModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 
@@ -116,6 +118,20 @@ public class CustomRowMapper {
                 book.setReleaseDate(result.getDate("releasedate"));
                 book.setBinding(result.getString("binding"));
                 book.setPrice(result.getFloat("price"));
+
+                var user = new UserModel();
+
+                user.setUserId(result.getInt("userId"));
+                user.setFirstName(result.getString("firstName"));
+                user.setLastName(result.getString("lastName"));
+                user.setEmail(result.getString("email"));
+                user.setStreet(result.getString("street"));
+                user.setHouseNum(result.getString("houseNum"));
+                user.setPlz(result.getString("plz"));
+                user.setRole(result.getString("role"));
+                user.setShopName(result.getString("shopName"));
+                user.setCity(result.getString("city"));
+                book.setOwner(user);
                 return book;
             }
         };
@@ -176,6 +192,37 @@ public class CustomRowMapper {
                 model.setReceiver(result.getInt("receiver"));
                 model.setUsedAt(result.getDate("usedAt"));
                 model.setUsedIn(result.getInt("usedIn"));
+                return model;
+            }
+        };
+    }
+
+    public static RowMapper<OrderModel> GetOrderModelRowMapper() {
+        return new RowMapper<OrderModel>() {
+            @Override
+            public OrderModel mapRow(ResultSet result, int rowNum) throws SQLException {
+                OrderModel model = new OrderModel();
+
+                model.setPaymentMethod(result.getString("paymentMethod"));
+                model.setId(result.getInt("id"));
+                model.setUserId(result.getInt("userId"));
+                model.setValue(result.getFloat("value"));
+                return model;
+            }
+        };
+    }
+
+    public static RowMapper<OrderPartModel> getOrderPartModelRowMapper() {
+        return new RowMapper<OrderPartModel>() {
+            @Override
+            public OrderPartModel mapRow(ResultSet result, int rowNum) throws SQLException {
+                OrderPartModel model = new OrderPartModel();
+
+                model.setBookId(result.getInt("bookId"));
+                model.setOrderId(result.getInt("orderId"));
+                model.setId(result.getInt("id"));
+                model.setUserId(result.getInt("userId"));
+                model.setExtraProductId(result.getInt("extraProductId"));
                 return model;
             }
         };

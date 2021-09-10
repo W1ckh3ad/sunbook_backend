@@ -32,12 +32,28 @@ public class OrderService {
     @Autowired
     private UserService userService;
 
-    public List<OrderResponseModel> get() {
-        return null;
+    public List<OrderResponseModel> get() throws SQLException {
+        var orders = orderProcesor.select();
+        var list = new ArrayList<OrderResponseModel>();
+        for (OrderModel orderModel : orders) {
+            list.add(get(orderModel.getId()));
+        }
+        return list;
     }
 
-    public OrderResponseModel get(int id) {
-        return null;
+    public OrderResponseModel get(int id) throws SQLException {
+        var orderModel = orderProcesor.select(id);
+        return get(orderModel);
+    }
+
+    public List<OrderResponseModel> get(String username) throws SQLException {
+        var user = userService.findUserByName(username);
+        var orders = orderProcesor.selectUserId(user.getUserId());
+        var list = new ArrayList<OrderResponseModel>();
+        for (OrderModel orderModel : orders) {
+            list.add(get(orderModel.getId()));
+        }
+        return list;
     }
 
     public OrderResponseModel post(OrderRequestModel model, String username) throws Exception, SQLException {
@@ -94,6 +110,10 @@ public class OrderService {
         if (model.getVouchers() != null) {
             for (var voucher : model.getVouchers()) {
                 var voucherModel = voucherService.createGift(voucher, user);
+                var orderPart = new OrderPartModel();
+                orderPart.setExtraProductId(voucherModel.getId());
+                orderPart.setOrderId(orderId);
+                orderPartProcessor.insert(orderPart);
                 codesToBuy.add(voucherModel);
             }
         }
@@ -110,6 +130,34 @@ public class OrderService {
         returnModel.setBooks(booksToBuy);
         returnModel.setCodes(codesToBuy);
         returnModel.setValue(value);
+        returnModel.setPaymentMethod(order.getPaymentMethod());
         return returnModel;
     }
+
+    private OrderResponseModel get(OrderModel orderModel) throws SQLException {
+
+        var model = new OrderResponseModel();
+        model.setId(orderModel.getId());
+        var books = new ArrayList<BookResponseModel>();
+        var boughtVouchers = new ArrayList<ExtraProductModel>();
+        var orderParts = orderPartProcessor.selectOrderId(orderModel.getId());
+        for (var part : orderParts) {
+            var bookId = part.getBookId();
+            var userId = part.getUserId();
+            var voucherId = part.getExtraProductId();
+            if (bookId != null && userId != null && bookId != 0 && userId != 0) {
+                books.add(bookService.get(part.getUserId(), part.getBookId()));
+            }
+            if (voucherId != null && voucherId != 0) {
+                boughtVouchers.add(voucherService.get(voucherId));
+            }
+        }
+
+        var usedCodes = voucherService.getUsedForOrderId(orderModel.getId());
+        model.setBooks(books);
+        model.setCodes(boughtVouchers);
+        model.setUsedCodes(usedCodes);
+        return model;
+    }
+
 }

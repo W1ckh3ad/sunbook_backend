@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import de.sunbook.api.models.responsemodels.OrderResponseModel;
 import de.sunbook.api.models.tablemodels.OrderModel;
 import de.sunbook.api.processors.abstracts.Processor;
+import de.sunbook.api.utils.CustomRowMapper;
 import de.sunbook.api.utils.sqlstringbuilder.OrderSqlStringBuilder;
 
 @Service
@@ -25,12 +25,19 @@ public class OrderProcesor extends Processor {
         return connection.insertAndGetId(sql);
     }
 
-    public List<OrderResponseModel> select() throws SQLException {
-        return null;
+    public List<OrderModel> select() throws SQLException {
+        var sql = sqlStringBuilder.select();
+        return connection.query(sql, CustomRowMapper.GetOrderModelRowMapper());
     }
 
-    public OrderResponseModel select(int uid) throws SQLException {
-        return null;
+    public OrderModel select(int uid) throws SQLException {
+        var sql = sqlStringBuilder.select();
+        return connection.querySingle(sql, CustomRowMapper.GetOrderModelRowMapper());
+    }
+
+    public List<OrderModel> selectUserId(int id) throws SQLException {
+        var sql = sqlStringBuilder.selectUserId(id);
+        return connection.query(sql, CustomRowMapper.GetOrderModelRowMapper());
     }
 
 }
