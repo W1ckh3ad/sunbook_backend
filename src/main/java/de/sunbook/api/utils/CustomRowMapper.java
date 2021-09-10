@@ -93,7 +93,7 @@ public class CustomRowMapper {
                 user.setRole(result.getString("role"));
                 user.setShopName(result.getString("shopName"));
                 user.setCity(result.getString("city"));
-                book.setOwner(user);
+                book.setUser(user);
                 return book;
             }
         };
@@ -131,7 +131,7 @@ public class CustomRowMapper {
                 user.setRole(result.getString("role"));
                 user.setShopName(result.getString("shopName"));
                 user.setCity(result.getString("city"));
-                book.setOwner(user);
+                book.setUser(user);
                 return book;
             }
         };

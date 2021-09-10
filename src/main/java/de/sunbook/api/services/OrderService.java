@@ -76,7 +76,7 @@ public class OrderService {
                 var bookToBuy = bookService.get(book.getSellerId(), book.getBookId());
                 var owner = new UserModel();
                 owner.setUserId(book.getSellerId());
-                bookToBuy.setOwner(owner);
+                bookToBuy.setUser(owner);
 
                 booksToBuy.add(bookToBuy);
                 value += bookToBuy.getPrice();

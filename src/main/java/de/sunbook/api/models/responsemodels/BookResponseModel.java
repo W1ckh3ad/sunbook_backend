@@ -6,7 +6,7 @@ import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 
 public class BookResponseModel extends BookModel {
-    private UserModel owner;
+    private UserModel user;
     private String userDescription;
 
     public BookResponseModel() {
@@ -14,19 +14,23 @@ public class BookResponseModel extends BookModel {
 
     public BookResponseModel(Integer uid, String genre, String title, String subtitle, String author,
             String description, String picture, String isbn, String publisher, String language, Date releaseDate,
-            String binding, Float price, UserModel owner, String userDescription) {
+            String binding, Float price, UserModel user, String userDescription) {
         super(uid, genre, title, subtitle, author, description, picture, isbn, publisher, language, releaseDate,
                 binding, price);
-        this.owner = owner;
+        this.user = user;
         this.userDescription = userDescription;
     }
 
     public UserModel getOwner() {
-        return owner;
+        return user;
     }
 
-    public void setOwner(UserModel owner) {
-        this.owner = owner;
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public UserModel getUser() {
+        return user;
     }
 
     public String getUserDescription() {
