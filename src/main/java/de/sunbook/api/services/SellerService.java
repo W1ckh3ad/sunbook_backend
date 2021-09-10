@@ -1,6 +1,8 @@
 package de.sunbook.api.services;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,15 @@ public class SellerService {
 
     @Autowired
     private UserProcessor userProcessor;
+
+    public List<SellerResponseModel> get() throws SQLException {
+        var sellers = userProcessor.selectSeller();
+        var list = new ArrayList<SellerResponseModel>();
+        for (var seller : sellers) {
+            list.add(getSeller(seller.getUserId()));
+        }
+        return list;
+    }
 
     public SellerResponseModel getSeller(int id) throws SQLException {
         var model = userProcessor.selectSeller(id);

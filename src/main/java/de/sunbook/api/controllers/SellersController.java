@@ -17,8 +17,12 @@ public class SellersController {
     @Autowired
     private SellerService sellerService;
 
+    @GetMapping
+    public ResponseEntity<?> get() throws SQLException {
+        return ResponseEntity.ok(sellerService.get());
+    }
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSeller(@PathVariable int id) throws SQLException {
+    public ResponseEntity<?> get(@PathVariable int id) throws SQLException {
         return ResponseEntity.ok(sellerService.getSeller(id));
     }
 }
