@@ -1,19 +1,23 @@
 package de.sunbook.api.models.tablemodels;
 
+import java.util.Date;
+
 public class OrderModel {
     private int id;
     private int userId;
     private float value;
     private String paymentMethod;
+    private Date createdAt;
 
     public OrderModel() {
     }
 
-    public OrderModel(int id, int userId, float value, String paymentMethod) {
+    public OrderModel(int id, int userId, float value, String paymentMethod, Date createdAt) {
         this.id = id;
         this.userId = userId;
         this.value = value;
         this.paymentMethod = paymentMethod;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -46,6 +50,14 @@ public class OrderModel {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
 }

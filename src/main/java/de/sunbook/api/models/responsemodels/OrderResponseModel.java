@@ -1,5 +1,6 @@
 package de.sunbook.api.models.responsemodels;
 
+import java.util.Date;
 import java.util.List;
 
 import de.sunbook.api.models.tablemodels.ExtraProductModel;
@@ -14,9 +15,9 @@ public class OrderResponseModel extends OrderModel {
 
     }
 
-    public OrderResponseModel(int id, int userId, float value, String paymentMethod, List<BookResponseModel> books,
-            List<ExtraProductModel> codes, List<ExtraProductModel> usedCodes) {
-        super(id, userId, value, paymentMethod);
+    public OrderResponseModel(int id, int userId, float value, String paymentMethod, Date createdAt,
+            List<BookResponseModel> books, List<ExtraProductModel> codes, List<ExtraProductModel> usedCodes) {
+        super(id, userId, value, paymentMethod, createdAt);
         this.books = books;
         this.codes = codes;
         this.usedCodes = usedCodes;

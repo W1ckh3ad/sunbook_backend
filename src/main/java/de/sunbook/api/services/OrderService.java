@@ -93,9 +93,11 @@ public class OrderService {
         }
 
         var order = new OrderModel();
+        var createdAt = new Date();
         order.setPaymentMethod(model.getPaymentMethod());
         order.setValue(value);
         order.setUserId(user.getUserId());
+        order.setCreatedAt(createdAt);
         var orderId = orderProcesor.insert(order);
         order.setId(orderId);
 
@@ -130,6 +132,7 @@ public class OrderService {
         returnModel.setBooks(booksToBuy);
         returnModel.setCodes(codesToBuy);
         returnModel.setValue(value);
+        returnModel.setCreatedAt(createdAt);
         returnModel.setPaymentMethod(order.getPaymentMethod());
         return returnModel;
     }
@@ -138,6 +141,9 @@ public class OrderService {
 
         var model = new OrderResponseModel();
         model.setId(orderModel.getId());
+        model.setCreatedAt(orderModel.getCreatedAt());
+        model.setPaymentMethod(orderModel.getPaymentMethod());
+        model.setValue(orderModel.getValue());
         var books = new ArrayList<BookResponseModel>();
         var boughtVouchers = new ArrayList<ExtraProductModel>();
         var orderParts = orderPartProcessor.selectOrderId(orderModel.getId());

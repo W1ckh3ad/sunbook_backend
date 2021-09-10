@@ -207,6 +207,7 @@ public class CustomRowMapper {
                 model.setId(result.getInt("id"));
                 model.setUserId(result.getInt("userId"));
                 model.setValue(result.getFloat("value"));
+                model.setCreatedAt(result.getDate("createdAt"));
                 return model;
             }
         };
