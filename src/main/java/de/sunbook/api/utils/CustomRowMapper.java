@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import de.sunbook.api.models.responsemodels.BookResponseModel;
+import de.sunbook.api.models.responsemodels.BookSingleSellerResponseModel;
+import de.sunbook.api.models.responsemodels.SellerSingleBookResponseModel;
 import de.sunbook.api.models.responsemodels.UserBookModelForBookResponseSingleModel;
 import de.sunbook.api.models.responsemodels.UserReponseForShopsModel;
 import de.sunbook.api.models.tablemodels.BookModel;
@@ -137,6 +139,27 @@ public class CustomRowMapper {
         };
     }
 
+    public static RowMapper<BookSingleSellerResponseModel> getBookSingleSellerResponseModelRowMapper() {
+        return new RowMapper<BookSingleSellerResponseModel>() {
+            @Override
+            public BookSingleSellerResponseModel mapRow(ResultSet result, int rowNum) throws SQLException {
+                var user = new BookSingleSellerResponseModel();
+                user.setUserDriscription(result.getString("userDescription"));
+                user.setUserId(result.getInt("userId"));
+                user.setFirstName(result.getString("firstName"));
+                user.setLastName(result.getString("lastName"));
+                user.setEmail(result.getString("email"));
+                user.setStreet(result.getString("street"));
+                user.setHouseNum(result.getString("houseNum"));
+                user.setPlz(result.getString("plz"));
+                user.setRole(result.getString("role"));
+                user.setShopName(result.getString("shopName"));
+                user.setCity(result.getString("city"));
+                return user;
+            }
+        };
+    }
+
     public static RowMapper<UserBookModelForBookResponseSingleModel> GetUserBookModelForBookResponseSingleModelRowMapp() {
         return new RowMapper<UserBookModelForBookResponseSingleModel>() {
             @Override
@@ -224,6 +247,33 @@ public class CustomRowMapper {
                 model.setId(result.getInt("id"));
                 model.setUserId(result.getInt("userId"));
                 model.setExtraProductId(result.getInt("extraProductId"));
+                return model;
+            }
+        };
+    }
+
+    public static RowMapper<SellerSingleBookResponseModel> getSellerSingleBookResponseModelRowMapper() {
+        return new RowMapper<SellerSingleBookResponseModel>() {
+            @Override
+            public SellerSingleBookResponseModel mapRow(ResultSet result, int rowNum) throws SQLException {
+                SellerSingleBookResponseModel model = new SellerSingleBookResponseModel();
+
+                model.setUserDiscription(result.getString("userDescription"));
+
+                model.setUid(result.getInt("uid"));
+                model.setGenre(result.getString("genre"));
+                model.setTitle(result.getString("title"));
+                model.setSubtitle(result.getString("subtitle"));
+                model.setAuthor(result.getString("author"));
+                model.setDescription(result.getString("description"));
+                model.setPicture(result.getString("picture"));
+                model.setIsbn(result.getString("isbn"));
+                model.setPublisher(result.getString("publisher"));
+                model.setLanguage(result.getString("language"));
+                model.setReleaseDate(result.getDate("releasedate"));
+                model.setBinding(result.getString("binding"));
+                model.setPrice(result.getFloat("price"));
+
                 return model;
             }
         };
