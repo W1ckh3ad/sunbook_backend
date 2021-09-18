@@ -5,31 +5,31 @@ import java.util.List;
 
 import de.sunbook.api.models.tablemodels.BookModel;
 
-public class BookResponseSingleModel extends BookModel {
-    private List<UserBookModelForBookResponseSingleModel> sellers;
+public class BookSingleResponseModel extends BookModel {
+    private List<BookSingleSellerResponseModel> sellers;
 
-    public BookResponseSingleModel() {
+    public BookSingleResponseModel() {
     }
 
-    public BookResponseSingleModel(Integer uid, String genre, String title, String subtitle, String author,
+    public BookSingleResponseModel(Integer uid, String genre, String title, String subtitle, String author,
             String description, String picture, String isbn, String publisher, String language, Date releaseDate,
-            String binding, Float price, List<UserBookModelForBookResponseSingleModel> sellers) {
+            String binding, Float price, List<BookSingleSellerResponseModel> sellers) {
         super(uid, genre, title, subtitle, author, description, picture, isbn, publisher, language, releaseDate,
                 binding, price);
         this.sellers = sellers;
     }
 
-    public BookResponseSingleModel(BookModel model, List<UserBookModelForBookResponseSingleModel> sellers) {
+    public BookSingleResponseModel(BookModel model, List<BookSingleSellerResponseModel> sellers) {
         this(model.getUid(), model.getGenre(), model.getTitle(), model.getSubtitle(), model.getAuthor(),
                 model.getDescription(), model.getPicture(), model.getIsbn(), model.getPublisher(), model.getLanguage(),
                 model.getReleaseDate(), model.getBinding(), model.getPrice(), sellers);
     }
 
-    public List<UserBookModelForBookResponseSingleModel> getSellers() {
+    public List<BookSingleSellerResponseModel> getSellers() {
         return sellers;
     }
 
-    public void setSellers(List<UserBookModelForBookResponseSingleModel> sellers) {
+    public void setSellers(List<BookSingleSellerResponseModel> sellers) {
         this.sellers = sellers;
     }
 

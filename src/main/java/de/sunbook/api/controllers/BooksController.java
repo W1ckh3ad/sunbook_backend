@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.sunbook.api.models.requestmodels.BookQueryModel;
-import de.sunbook.api.models.responsemodels.BookResponseSingleModel;
+import de.sunbook.api.models.responsemodels.BookSingleResponseModel;
 import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.services.BookService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,7 +39,7 @@ public class BooksController {
         }
 
         @GetMapping("/{id}")
-        public BookResponseSingleModel getSingle(@PathVariable int id) throws SQLException {
+        public BookSingleResponseModel getSingle(@PathVariable int id) throws SQLException {
                 return bookService.getWithSellers(id);
         }
 

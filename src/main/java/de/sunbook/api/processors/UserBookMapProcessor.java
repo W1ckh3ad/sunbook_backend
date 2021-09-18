@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import de.sunbook.api.models.requestmodels.BookQueryModel;
 import de.sunbook.api.models.responsemodels.BookResponseModel;
-import de.sunbook.api.models.responsemodels.UserBookModelForBookResponseSingleModel;
+import de.sunbook.api.models.responsemodels.BookSingleSellerResponseModel;
+import de.sunbook.api.models.responsemodels.SellerSingleBookResponseModel;
 import de.sunbook.api.models.tablemodels.UserBookMapModel;
 import de.sunbook.api.processors.abstracts.Processor;
 import de.sunbook.api.utils.CustomRowMapper;
@@ -57,9 +58,9 @@ public class UserBookMapProcessor extends Processor {
         return connection.query(sql, CustomRowMapper.GetUserBookMapRowMapperWithoutUser());
     }
 
-    public List<BookResponseModel> selectBooksForUserId(int id) throws SQLException {
+    public List<SellerSingleBookResponseModel> selectBooksForUserId(int id) throws SQLException {
         var sql = sqlStringBuilder.selectWithUserId(id);
-        return connection.query(sql, CustomRowMapper.GetUserBookMapRowMapperWithoutUser());
+        return connection.query(sql, CustomRowMapper.getSellerSingleBookResponseModelRowMapper());
     }
 
     public BookResponseModel selectBookForUserId(int id, int bookId) throws SQLException {
@@ -67,9 +68,9 @@ public class UserBookMapProcessor extends Processor {
         return connection.querySingle(sql, CustomRowMapper.GetUserBookMapRowMapperWithoutUser());
     }
 
-    public List<UserBookModelForBookResponseSingleModel> selectShopsForBook(int id) throws SQLException {
+    public List<BookSingleSellerResponseModel> selectShopsForBook(int id) throws SQLException {
         var sql = sqlStringBuilder.selectWithBook(id);
-        return connection.query(sql, CustomRowMapper.GetUserBookModelForBookResponseSingleModelRowMapp());
+        return connection.query(sql, CustomRowMapper.getBookSingleSellerResponseModelRowMapper());
     }
 
 }
