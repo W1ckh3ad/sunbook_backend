@@ -15,7 +15,7 @@ import de.sunbook.api.processors.UserProcessor;
 @Service
 public class UserService {
     @Autowired
-    private UserProcessor userProcessor;
+    private UserProcessor userProcessor = new UserProcessor();
 
     @Autowired
     private PasswordEncoder passwordEncoder;

@@ -2,7 +2,8 @@ package de.sunbook.api.controllers;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,11 +38,17 @@ import de.sunbook.api.utils.JwtUtil;
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
+    
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager = new AuthenticationManager(){
+        @Override
+        public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+            return null;
+        }      
+    };//for the Tests
 
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private MyUserDetailsService userDetailsService = new MyUserDetailsService();
 
     @Autowired
     private JwtUtil jwtTokenUtil;

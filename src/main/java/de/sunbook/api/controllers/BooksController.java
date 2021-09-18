@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 public class BooksController {
 
         @Autowired
-        private BookService bookService;
+        private BookService bookService = new BookService();
 
         @GetMapping
         @Operation(description = "Select different optional Statements for the List Search", parameters = {

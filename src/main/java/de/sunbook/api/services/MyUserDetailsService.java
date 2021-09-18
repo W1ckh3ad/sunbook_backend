@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserService userService;
+    private UserService userService = new UserService();
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

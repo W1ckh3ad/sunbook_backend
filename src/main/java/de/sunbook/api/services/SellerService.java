@@ -14,10 +14,10 @@ import de.sunbook.api.processors.UserProcessor;
 public class SellerService {
 
     @Autowired
-    private BookService bookService;
+    private BookService bookService = new BookService();
 
     @Autowired
-    private UserProcessor userProcessor;
+    private UserProcessor userProcessor = new UserProcessor();
 
     public List<SellerResponseModel> get() throws SQLException {
         var sellers = userProcessor.selectSeller();

@@ -15,7 +15,7 @@ import de.sunbook.api.services.SellerService;
 @RequestMapping("/api/sellers")
 public class SellersController {
     @Autowired
-    private SellerService sellerService;
+    private SellerService sellerService = new SellerService();
 
     @GetMapping
     public ResponseEntity<?> get() throws SQLException {

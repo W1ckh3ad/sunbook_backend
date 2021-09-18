@@ -25,10 +25,10 @@ public class BookService {
     private UserProcessor userProcessor;
 
     @Autowired
-    private BookProcessor bookProcessor;
+    private BookProcessor bookProcessor = new BookProcessor();
 
     @Autowired
-    private UserBookMapProcessor userBookMapProcessor;
+    private UserBookMapProcessor userBookMapProcessor = new UserBookMapProcessor();
 
     public List<BookModel> get() throws SQLException {
         return bookProcessor.select();
