@@ -45,13 +45,13 @@ public class AccountController {
         public Authentication authenticate(Authentication authentication) throws AuthenticationException {
             return null;
         }      
-    };//for the Tests
+    };
 
     @Autowired
     private MyUserDetailsService userDetailsService = new MyUserDetailsService();
 
     @Autowired
-    private JwtUtil jwtTokenUtil;
+    private JwtUtil jwtTokenUtil = new JwtUtil();
 
     @Autowired
     private UserService userService;

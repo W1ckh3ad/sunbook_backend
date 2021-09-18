@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import de.sunbook.api.connections.SqlServerConnection;
 import de.sunbook.api.controllers.AccountController;
 import de.sunbook.api.controllers.BooksController;
@@ -18,16 +17,8 @@ public class ApiNegativeTests {
     BooksController booksController = new BooksController();
     
     @Autowired
-    AuthenticationRequestModel authenticationRequestModel;
-    
-    @Autowired
-    SellersController sellersBController; 
+    SellersController sellersController; 
 
-    @Autowired
-    AccountController accountController;
-
-    @Autowired
-    SqlServerConnection sqlServerConnection;
 
     @Test
     void searchBookByListNegativeTest() throws Exception{
@@ -35,19 +26,13 @@ public class ApiNegativeTests {
         String testBinding = "Taschenbuch";
         Float testMaxPrice = (float) 10.0;
         Float testMinPrice = (float) 9.0;       
+        
+        assertThat(booksController.searchBookByList(testMaxPrice.toString(), testMinPrice.toString(), null, null)).isEmpty();
 
-       /* assertThat(assertThrows(Exception.class, () -> {
-            booksController.searchBookByList(null, null, testMinPrice, testMaxPrice); //price changed
-        })). //.isNull(); //Fehler muss isNotNull sein
+        assertThat(booksController.searchBookByList(null, null, testMaxPrice, (testMinPrice - ((float) 100000.0)))).isNotEmpty();
 
-        assertThat(assertThrows(Exception.class, () -> {          
-            booksController.searchBookByList(null, null, testMaxPrice, (testMinPrice - ((float) 100000.0))); 
-        })).isNotNull(); //prüft er nicht
+        assertThat(booksController.searchBookByList(null, null, testMinPrice, testMaxPrice)).isEmpty();
 
-        assertThat(assertThrows(Exception.class, () -> {
-            booksController.searchBookByList(testMaxPrice.toString(), testMinPrice.toString(), null, null);
-        })).isNotNull(); // prüft er auch nicht
-*/
         assertThat(assertThrows(Exception.class, () -> {
             booksController = null;
             booksController.searchBookByList(null, null, null, null); 
@@ -56,9 +41,7 @@ public class ApiNegativeTests {
         assertThat(assertThrows(Exception.class, () -> {
             booksController = null;
             booksController.searchBookByList(null, null, Float.parseFloat(testBinding), Float.parseFloat(testGenre)); 
-        })).isNotNull();
-
-        
+        })).isNotNull(); 
     }
 
 
@@ -75,7 +58,6 @@ public class ApiNegativeTests {
         assertThat(assertThrows(Exception.class, () -> {
             booksController.getSingle(0);
         })).isNotNull();
-        //ergänzen
     }
 
 
@@ -92,8 +74,6 @@ public class ApiNegativeTests {
         assertThat(assertThrows(Exception.class, () -> {
             booksController.getSingleIsbn(testISBN);
         })).isNotNull();
-
-        //ergänzen
     }
 
 
@@ -103,43 +83,26 @@ public class ApiNegativeTests {
         int id = -11;   
         
         assertThat(assertThrows(Exception.class, () -> {
-            sellersBController.get(id);
+            sellersController.get(id);
         })).isNotNull();
 
         assertThat(assertThrows(Exception.class, () -> {
-            sellersBController.get(0);
+            sellersController.get(0);
         })).isNotNull();
-
-        //Ergänzen
-        
     }
 
 
     @Test
     void createAuthenticationTokenNegativeTest() throws Exception{
+        AccountController accountController = new AccountController();
         AuthenticationRequestModel authenticationRequestModel = new AuthenticationRequestModel();
         authenticationRequestModel.setUsername("");
         authenticationRequestModel.setPassword("");
-   /*     
-        assertThat(assertThrows(NullPointerException.class, () -> {
-            accountController.createAuthenticationToken(null);
-        })).hasMessage("Request body missing");
-*/
 
         assertThat(assertThrows(Exception.class, () -> {
             accountController.createAuthenticationToken(authenticationRequestModel);
         })).isNotNull();
-
     }
-
-    
-    @Test
-    void sqlConnectionNegativeTest() throws Exception{
-        
-        assertThat(assertThrows(Exception.class, () -> {
-            SqlServerConnection.getInstance();
-        })).isNotNull();
-    } 
 
 
     @Test
@@ -150,7 +113,5 @@ public class ApiNegativeTests {
             SqlServerConnection.getInstance().query(testSql, CustomRowMapper.GetBookMapper());
         })).isNotNull();
 
-
-        //speziellen Testcase ergänzen
     } 
 }
