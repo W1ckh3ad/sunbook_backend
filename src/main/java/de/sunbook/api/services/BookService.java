@@ -10,8 +10,8 @@ import org.webjars.NotFoundException;
 import de.sunbook.api.models.requestmodels.AddBookToSellRequestModel;
 import de.sunbook.api.models.requestmodels.BookQueryModel;
 import de.sunbook.api.models.responsemodels.BookResponseModel;
-import de.sunbook.api.models.responsemodels.BookSingleResponseModel;
-import de.sunbook.api.models.responsemodels.SellerSingleBookResponseModel;
+import de.sunbook.api.models.responsemodels.BookResponseSingleModel;
+import de.sunbook.api.models.responsemodels.UserBookModelForBookResponseSingleModel;
 import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.models.tablemodels.UserBookMapModel;
 import de.sunbook.api.processors.BookProcessor;
@@ -36,6 +36,13 @@ public class BookService {
 
     public BookModel get(int id) throws SQLException {
         return bookProcessor.select(id);
+    }
+
+    public BookModel getIsbn(String isbn) throws SQLException {
+        BookModel model = bookProcessor.select(isbn);
+        var list = userBookMapProcessor.selectShopsForBook(model.getUid());
+        var response = new BookResponseSingleModel(model, list);
+        return response;
     }
 
     public void put(int id, BookModel model) throws SQLException {
@@ -66,21 +73,18 @@ public class BookService {
         return userBookMapProcessor.selectBooksForUserName(username);
     }
 
-    public List<SellerSingleBookResponseModel> getBooksForUser(int id) throws SQLException {
+    public List<BookResponseModel> getBooksForUser(int id) throws SQLException {
         return userBookMapProcessor.selectBooksForUserId(id);
     }
 
-    public BookSingleResponseModel getWithSellers(int id) throws SQLException {
-        BookModel model = bookProcessor.select(id);
-        var list = userBookMapProcessor.selectShopsForBook(id);
-        var response = new BookSingleResponseModel(model, list);
-        return response;
+    public List<UserBookModelForBookResponseSingleModel> getShopsForBook(int id) throws SQLException {
+        return userBookMapProcessor.selectShopsForBook(id);
     }
 
-    public BookSingleResponseModel getIsbn(String isbn) throws SQLException {
-        BookModel model = bookProcessor.select(isbn);
-        var list = userBookMapProcessor.selectShopsForBook(model.getUid());
-        var response = new BookSingleResponseModel(model, list);
+    public BookResponseSingleModel getWithSellers(int id) throws SQLException {
+        BookModel model = bookProcessor.select(id);
+        var list = userBookMapProcessor.selectShopsForBook(id);
+        var response = new BookResponseSingleModel(model, list);
         return response;
     }
 
