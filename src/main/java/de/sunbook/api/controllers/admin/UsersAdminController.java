@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import de.sunbook.api.models.tablemodels.UserModel;
 import de.sunbook.api.services.UserService;
 
+/*
+This class defines the Controller for the Admin to add, change, finde or delete user
+*/
 @RestController
 @RequestMapping("/api/admin/users")
 public class UsersAdminController {

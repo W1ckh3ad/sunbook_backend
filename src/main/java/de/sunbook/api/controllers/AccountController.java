@@ -35,6 +35,10 @@ import de.sunbook.api.services.OrderService;
 import de.sunbook.api.services.UserService;
 import de.sunbook.api.utils.JwtUtil;
 
+
+/*
+This class defines the Controller to login, register or show the information of an user, add change or delete sells  
+*/
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
@@ -62,6 +66,7 @@ public class AccountController {
     @Autowired
     private OrderService orderService;
 
+    //authentificate an user with the password and username, returns the JWT for the User
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody(required = true) AuthenticationRequestModel request)
             throws Exception {
@@ -72,13 +77,14 @@ public class AccountController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),
                     request.getPassword(), new ArrayList<>()));
         } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or passowrd", e);
+            throw new Exception("Incorrect username or password", e);
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponseModel(jwt));
     }
 
+    //register new User
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> register(@RequestBody(required = true) RegisterRequestModel request) throws Exception {
         if (request == null) {

@@ -9,6 +9,9 @@ import java.util.Map;
 
 import de.sunbook.api.models.requestmodels.BookQueryModel;
 
+/*
+This is the String Builder for the Query to the Database
+*/
 public class SqlStringBuilder {
     protected String table;
     protected String keyColumn;

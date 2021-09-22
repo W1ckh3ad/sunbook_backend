@@ -11,6 +11,8 @@ import de.sunbook.api.controllers.SellersController;
 import de.sunbook.api.models.requestmodels.AuthenticationRequestModel;
 import de.sunbook.api.utils.CustomRowMapper;
 
+// This are the Negativ Tests with special Use Cases or fundamental functions, 
+// false or invalid input data to check the reaction of the program
 public class ApiNegativeTests {
 
     @Autowired
@@ -20,6 +22,13 @@ public class ApiNegativeTests {
     SellersController sellersController; 
 
 
+    /*
+    Testcase 1
+    Test of the searchBookByList Function
+    Only unvalid input data 
+    different combinations
+    expect no valid output result or exceptions
+    */
     @Test
     void searchBookByListNegativeTest() throws Exception{
         String testGenre = "romane";
@@ -45,6 +54,13 @@ public class ApiNegativeTests {
     }
 
 
+    /*
+    Testcase 2
+    Test of the getSingle Function
+    Only unvalid input data 
+    different combinations
+    expect exceptions
+    */
     @Test
     void getSingleNegativeTest() throws Exception{
         int testID = -15; 
@@ -61,6 +77,13 @@ public class ApiNegativeTests {
     }
 
 
+    /*
+    Testcase 3
+    Test of the getSingle Function
+    Only unvalid input data 
+    different combinations
+    expect exceptions
+    */
     @Test
     void getSingleIsbnNegativeTest() throws Exception{
         String testISBN = "abc";
@@ -77,7 +100,13 @@ public class ApiNegativeTests {
     }
 
 
-
+    /*
+    Testcase 4
+    Test of the sellersControllerGet Function
+    Only unvalid input data 
+    different combinations
+    expect exceptions
+    */
     @Test
     void sellersControllerGetNegativeTest() throws Exception{
         int id = -11;   
@@ -92,19 +121,44 @@ public class ApiNegativeTests {
     }
 
 
+    /*  
+    Testcase 5
+    Test of the createAuthenticationToken Function
+    Only unvalid input data without any username or password
+    expect exceptions
+    */
     @Test
     void createAuthenticationTokenNegativeTest() throws Exception{
         AccountController accountController = new AccountController();
         AuthenticationRequestModel authenticationRequestModel = new AuthenticationRequestModel();
+        
         authenticationRequestModel.setUsername("");
         authenticationRequestModel.setPassword("");
+        
+        assertThat(assertThrows(Exception.class, () -> {
+            accountController.createAuthenticationToken(authenticationRequestModel);
+        })).isNotNull();
+
+        assertThat(assertThrows(Exception.class, () -> {
+            accountController.createAuthenticationToken(null);
+        })).hasMessageContaining("Request body missing");
+
+        authenticationRequestModel.setUsername("");
+        authenticationRequestModel.setPassword("12345678");
 
         assertThat(assertThrows(Exception.class, () -> {
             accountController.createAuthenticationToken(authenticationRequestModel);
         })).isNotNull();
+
     }
 
 
+    /*  
+    Testcase 6
+    Test of the query Function
+    Only unvalid input data
+    expect exceptions
+    */
     @Test
     void queryNegativeTest() throws Exception{
         String testSql ="SLCT * FRM Bk WHR sbn = '978-3-442-31448-5'";       

@@ -1,5 +1,8 @@
 package de.sunbook.api.models.tablemodels;
 
+/*
+This is the model of the users
+*/
 public class UserModel {
     private Integer userId;
     private String firstName;

@@ -4,6 +4,9 @@ import java.util.List;
 
 import de.sunbook.api.models.BookBuyModel;
 
+/*
+This class defines the request model for an order
+*/
 public class OrderRequestModel {
     private List<BookBuyModel> books;
     private List<CreateVoucherRequestModel> vouchers;

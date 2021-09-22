@@ -12,6 +12,10 @@ import de.sunbook.api.models.requestmodels.RegisterRequestModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 import de.sunbook.api.processors.UserProcessor;
 
+/*
+This is the Service for the Users, this class provides the Logic of the Programm, 
+called by the Controllers, is used for the right login or registration process 
+*/
 @Service
 public class UserService {
     @Autowired

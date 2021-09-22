@@ -6,6 +6,9 @@ import java.util.Map;
 import de.sunbook.api.models.tablemodels.OrderModel;
 import de.sunbook.api.utils.sqlstringbuilder.abstracts.SqlStringBuilder;
 
+/*
+This is the String Builder for the Order Query to the Database
+*/
 public class OrderSqlStringBuilder extends SqlStringBuilder {
 
     public OrderSqlStringBuilder(String table) {

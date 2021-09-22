@@ -1,5 +1,8 @@
 package de.sunbook.api.models.tablemodels;
 
+/*
+This is the model of the order parts
+*/
 public class OrderPartModel {
     private int id;
     private int orderId;

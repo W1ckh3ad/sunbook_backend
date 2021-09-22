@@ -1,5 +1,8 @@
 package de.sunbook.api.models.responsemodels;
 
+/*
+This class defines the response for shops
+*/
 public class UserReponseForShopsModel {
     private Integer userId;
     private String firstName;

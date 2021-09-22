@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model to query a book
+*/
 public class BookQueryModel {
     private String genre;
     private String binding;

@@ -15,6 +15,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import de.sunbook.api.filters.JwtRequestFilter;
 import de.sunbook.api.services.MyUserDetailsService;
 
+/*
+This class enables the Websecurity, protect the routes to the controllers
+*/
 @EnableWebSecurity
 public class SecurityAdapter extends WebSecurityConfigurerAdapter {
 

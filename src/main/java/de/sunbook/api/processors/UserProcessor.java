@@ -11,6 +11,9 @@ import de.sunbook.api.processors.interfaces.ICrudProcessor;
 import de.sunbook.api.utils.CustomRowMapper;
 import de.sunbook.api.utils.sqlstringbuilder.UserSqlStringBuilder;
 
+/*
+This is the processor for the sql methods for the user table
+*/
 @Service
 public class UserProcessor extends Processor implements ICrudProcessor<UserModel> {
     private UserSqlStringBuilder sqlStringBuilder;

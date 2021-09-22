@@ -2,6 +2,9 @@ package de.sunbook.api.models.tablemodels;
 
 import java.util.Date;
 
+/*
+This is the model of the orders
+*/
 public class OrderModel {
     private int id;
     private int userId;

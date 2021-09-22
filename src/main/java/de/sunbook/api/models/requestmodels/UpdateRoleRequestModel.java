@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model for a role change of an user
+*/
 public class UpdateRoleRequestModel {
     private String role;
 

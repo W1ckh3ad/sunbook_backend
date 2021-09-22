@@ -6,6 +6,9 @@ import java.util.List;
 import de.sunbook.api.models.tablemodels.ExtraProductModel;
 import de.sunbook.api.models.tablemodels.OrderModel;
 
+/*
+This class defines the response after an order
+*/
 public class OrderResponseModel extends OrderModel {
     private List<BookResponseModel> books;
     private List<ExtraProductModel> codes;

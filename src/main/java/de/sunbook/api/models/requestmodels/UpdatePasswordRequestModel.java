@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model for the password change
+*/
 public class UpdatePasswordRequestModel {
     private String password;
 

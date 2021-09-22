@@ -8,6 +8,9 @@ import de.sunbook.api.models.requestmodels.BookQueryModel;
 import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.utils.sqlstringbuilder.abstracts.SqlStringBuilder;
 
+/*
+This is the String Builder for the Query to the Book Database
+*/
 public class BookSqlStringBuilder extends SqlStringBuilder {
     public BookSqlStringBuilder(String table) {
         super(table, "uid");

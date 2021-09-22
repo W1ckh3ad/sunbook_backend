@@ -18,6 +18,9 @@ import de.sunbook.api.processors.BookProcessor;
 import de.sunbook.api.processors.UserBookMapProcessor;
 import de.sunbook.api.processors.UserProcessor;
 
+/*
+This is the Service for the Books, this class provides the Logic of the Programm, called by the Controllers 
+*/
 @Service
 public class BookService {
 

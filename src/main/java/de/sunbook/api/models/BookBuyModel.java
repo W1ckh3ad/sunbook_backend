@@ -1,5 +1,8 @@
 package de.sunbook.api.models;
 
+/*
+This is the model for buying a book
+*/
 public class BookBuyModel {
     private int bookId;
     private int sellerId;

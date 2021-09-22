@@ -2,6 +2,9 @@ package de.sunbook.api.models.responsemodels;
 
 import java.util.Date;
 
+/*
+This class defines the response for the voucher
+*/
 public class CreateVoucherResponseModel {
     private String code;
     private Date createdAt;

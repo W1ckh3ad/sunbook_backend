@@ -12,6 +12,10 @@ import de.sunbook.api.models.tablemodels.ExtraProductModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 import de.sunbook.api.processors.ExtraProductProcessor;
 
+/*
+This is the Service for the Voucher, this class provides the Logic of the Programm, 
+called by the Controllers, finds or validates a voucher 
+*/
 @Service
 public class VoucherService {
     /**

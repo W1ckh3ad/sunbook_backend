@@ -16,6 +16,9 @@ import de.sunbook.api.models.requestmodels.OrderRequestModel;
 import de.sunbook.api.services.OrderService;
 import de.sunbook.api.services.VoucherService;
 
+/*
+This class defines the Controller for new orders and to validate the vouchers 
+*/
 @RestController
 @RequestMapping("/api/orders")
 public class OrdersController {
@@ -24,15 +27,17 @@ public class OrdersController {
     private VoucherService voucherService;
 
     @Autowired
-    private OrderService orderSerivce;
+    private OrderService orderService;
+
 
     @PostMapping
     public ResponseEntity<?> post(@RequestBody OrderRequestModel request) throws Exception, SQLException {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        var response = orderSerivce.post(request, username);
+        var response = orderService.post(request, username);
         return ResponseEntity.ok(response);
     }
 
+    //validates the voucher
     @GetMapping("/validateVoucher")
     public ResponseEntity<?> validateVoucher(@RequestParam String code) throws SQLException, Exception {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.sunbook.api.services.SellerService;
 
+/*
+This class defines the Controller for the sellers
+*/
 @RestController
 @RequestMapping("/api/sellers")
 public class SellersController {

@@ -18,6 +18,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import de.sunbook.api.services.MyUserDetailsService;
 import de.sunbook.api.utils.JwtUtil;
 
+/*
+This class checks all requests wether the user sends a valid JWT within the request
+*/
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 

@@ -13,6 +13,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+/*
+This is the Service for the User Information, this class provides the Logic of the Programm, 
+called by the Controllers, load the user details 
+*/
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired

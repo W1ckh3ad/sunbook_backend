@@ -3,6 +3,9 @@ package de.sunbook.api.processors.interfaces;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
+This is an interface with for sql methods
+*/
 public interface ICrudProcessor<TTableModel> {
     List<TTableModel> select() throws SQLException;
 

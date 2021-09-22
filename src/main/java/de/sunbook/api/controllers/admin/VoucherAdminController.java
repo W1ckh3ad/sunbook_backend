@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import de.sunbook.api.models.requestmodels.CreateVoucherRequestModel;
 import de.sunbook.api.services.VoucherService;
 
+/*
+This class defines the Controller for the Admin to add vouchers 
+*/
 @RestController
 @RequestMapping("/api/admin/vouchers")
 public class VoucherAdminController {

@@ -10,6 +10,9 @@ import de.sunbook.api.processors.abstracts.Processor;
 import de.sunbook.api.utils.CustomRowMapper;
 import de.sunbook.api.utils.sqlstringbuilder.OrderSqlStringBuilder;
 
+/*
+This is the processor for the sql methods for the orders
+*/
 @Service
 public class OrderProcesor extends Processor {
 

@@ -6,6 +6,9 @@ import java.util.Map;
 import de.sunbook.api.models.tablemodels.UserModel;
 import de.sunbook.api.utils.sqlstringbuilder.abstracts.SqlStringBuilder;
 
+/*
+This is the String Builder for the Query to the User Database
+*/
 public class UserSqlStringBuilder extends SqlStringBuilder {
 
     public UserSqlStringBuilder(String table, String keyColumn) {

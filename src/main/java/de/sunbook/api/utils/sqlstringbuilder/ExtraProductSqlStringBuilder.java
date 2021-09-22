@@ -7,6 +7,9 @@ import java.util.Map;
 import de.sunbook.api.models.tablemodels.ExtraProductModel;
 import de.sunbook.api.utils.sqlstringbuilder.abstracts.SqlStringBuilder;
 
+/*
+This is the String Builder for the Query to the Database for Extra Products
+*/
 public class ExtraProductSqlStringBuilder extends SqlStringBuilder {
     public ExtraProductSqlStringBuilder(String table) {
         super(table, "id");

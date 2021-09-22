@@ -4,6 +4,9 @@ import java.util.List;
 
 import de.sunbook.api.models.tablemodels.UserModel;
 
+/*
+This class defines the response for sellers
+*/
 public class SellerResponseModel extends UserReponseForShopsModel {
     private List<BookResponseModel> sellers;
 

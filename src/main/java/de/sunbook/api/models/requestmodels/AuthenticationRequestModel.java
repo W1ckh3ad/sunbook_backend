@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model for the Authentification Request
+*/
 public class AuthenticationRequestModel {
     private String username;
     private String password;

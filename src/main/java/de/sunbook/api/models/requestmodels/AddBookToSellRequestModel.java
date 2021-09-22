@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model for a book to sell
+*/
 public class AddBookToSellRequestModel {
     private int bookId;
     private String description;

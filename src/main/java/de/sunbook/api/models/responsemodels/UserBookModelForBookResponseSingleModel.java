@@ -1,5 +1,8 @@
 package de.sunbook.api.models.responsemodels;
 
+/*
+This class defines the response for the user book map
+*/
 public class UserBookModelForBookResponseSingleModel {
     private String userDescription;
     private UserReponseForShopsModel user;

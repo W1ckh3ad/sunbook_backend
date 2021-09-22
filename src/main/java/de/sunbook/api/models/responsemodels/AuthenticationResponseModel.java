@@ -1,5 +1,8 @@
 package de.sunbook.api.models.responsemodels;
 
+/*
+This class defines the response for the Authentification of an user
+*/
 public class AuthenticationResponseModel {
     private final String jwt;
 

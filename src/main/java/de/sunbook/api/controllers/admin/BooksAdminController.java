@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.services.BookService;
 
+
+/*
+This class defines the Controller for the Admin to add, change or delete books
+*/
 @RestController
 @RequestMapping("/api/admin/books")
 public class BooksAdminController {

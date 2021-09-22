@@ -17,7 +17,7 @@ import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.services.SellerService;
 import de.sunbook.api.utils.CustomRowMapper;
 
-
+// This are the Api Standard Tests with special Use Cases or fundamental Functions
 public class ApiStandardTests { 
     
     @Autowired
@@ -36,6 +36,13 @@ public class ApiStandardTests {
     AuthenticationRequestModel authenticationRequestModel = new AuthenticationRequestModel();
        
 
+    /*
+    Testcase 1
+    Test of the searchBookByList Function
+    Only valid input data
+    test different combinations 
+    compare between real value and expected value
+    */
     @Test
     void searchBookByListTest() throws Exception{
         String testGenre = "romane";
@@ -67,9 +74,15 @@ public class ApiStandardTests {
         assertThat(listOfResults).isNotNull();
 
         assertThat(listOfResults.contains(expectedTestModel));
- }
+    }
 
 
+    /*
+    Testcase 2
+    Test of the getSingle Function
+    Only valid input data
+    compare between real value and expected value
+    */
     @Test
     void getSingleTest() throws Exception{
         int testID = 1;
@@ -85,9 +98,15 @@ public class ApiStandardTests {
 
         assertThat(bookResponseModel).isNotNull();
         assertThat(expectedTestModel.equals(bookResponseModel));
- }
+    }
 
 
+    /*
+    Testcase 3
+    Test of the getSingleIsbn Function
+    Only valid input data
+    compare between real value and expected value
+    */
     @Test
     void getSingleIsbnTest() throws Exception{
         String testISBN = "978-3-442-31448-5";
@@ -107,7 +126,12 @@ public class ApiStandardTests {
     }
 
 
-
+    /*
+    Testcase 4
+    Test of the sellersControllerGet Function
+    Only valid input data
+    expect a valid output result
+    */
     @Test
     void sellersControllerGetTest() throws Exception{
         int id = 1;   
@@ -120,6 +144,12 @@ public class ApiStandardTests {
     }
 
 
+    /*
+    Testcase 5
+    Test of the createAuthentification Function
+    Only valid input data with a test user 
+    expect a valid output result
+    */
     @Test
     void createAuthenticationTokenTest() throws Exception{
           
@@ -133,13 +163,24 @@ public class ApiStandardTests {
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
     }
 
-    
+
+    /*
+    Testcase 6
+    Test of the sqlConnection Function for the connection to the database 
+    expect a valid output result that is not null
+    */
     @Test
     void sqlConnectionTest() throws Exception{
-        SqlServerConnection.getInstance();
+        assertThat(SqlServerConnection.getInstance()).isNotNull();
     }
 
 
+    /*
+    Testcase 7
+    Test of the query Function
+    Only valid input data with a test book 
+    expect a valid output result that is not null
+    */
     @Test
     void queryTest() throws Exception{
         String testSql ="SELECT * FROM BOOK WHERE isbn = '978-3-442-31448-5'";

@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model for a registration of a new user
+*/
 public class RegisterRequestModel extends AuthenticationRequestModel {
 
     private String lastName;

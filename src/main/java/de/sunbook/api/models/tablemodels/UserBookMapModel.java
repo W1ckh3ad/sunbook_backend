@@ -1,5 +1,8 @@
 package de.sunbook.api.models.tablemodels;
 
+/*
+This is the model of the mapping between user and books
+*/
 public class UserBookMapModel {
     private Integer uid;
     private Integer userId;

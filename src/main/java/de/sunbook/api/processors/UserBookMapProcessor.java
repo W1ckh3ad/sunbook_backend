@@ -13,6 +13,9 @@ import de.sunbook.api.processors.abstracts.Processor;
 import de.sunbook.api.utils.CustomRowMapper;
 import de.sunbook.api.utils.sqlstringbuilder.UserBookMapSqlStringBuilder;
 
+/*
+This is the processor for the sql methods for the user and book mapping
+*/
 @Service
 public class UserBookMapProcessor extends Processor {
     UserBookMapSqlStringBuilder sqlStringBuilder;

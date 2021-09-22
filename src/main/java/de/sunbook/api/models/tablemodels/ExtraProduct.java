@@ -2,6 +2,9 @@ package de.sunbook.api.models.tablemodels;
 
 import java.util.Date;
 
+/*
+This is the Extra Product Class
+*/
 public class ExtraProduct {
 
     private String productName;

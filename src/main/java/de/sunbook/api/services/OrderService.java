@@ -18,6 +18,9 @@ import de.sunbook.api.models.tablemodels.UserModel;
 import de.sunbook.api.processors.OrderPartProcessor;
 import de.sunbook.api.processors.OrderProcesor;
 
+/*
+This is the Service for the Users, this class provides the Logic of the Programm, called by the Controllers 
+*/
 @Service
 public class OrderService {
 

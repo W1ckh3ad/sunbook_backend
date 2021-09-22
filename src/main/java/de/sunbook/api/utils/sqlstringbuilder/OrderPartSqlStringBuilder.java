@@ -6,6 +6,9 @@ import java.util.Map;
 import de.sunbook.api.models.tablemodels.OrderPartModel;
 import de.sunbook.api.utils.sqlstringbuilder.abstracts.SqlStringBuilder;
 
+/*
+This is the String Builder for the Query to the Database for Order Parts
+*/
 public class OrderPartSqlStringBuilder extends SqlStringBuilder {
 
     public OrderPartSqlStringBuilder(String table) {

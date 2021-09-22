@@ -5,6 +5,9 @@ import java.util.List;
 
 import de.sunbook.api.models.tablemodels.BookModel;
 
+/*
+This class defines the response after a book search with only one book
+*/
 public class BookResponseSingleModel extends BookModel {
     private List<UserBookModelForBookResponseSingleModel> sellers;
 

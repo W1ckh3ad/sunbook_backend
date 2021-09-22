@@ -1,5 +1,8 @@
 package de.sunbook.api.models.requestmodels;
 
+/*
+This class defines the request model to create a voucher
+*/
 public class CreateVoucherRequestModel {
     private float value;
     private Integer receiverId;

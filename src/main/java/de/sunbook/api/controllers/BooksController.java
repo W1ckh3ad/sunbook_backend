@@ -18,6 +18,10 @@ import de.sunbook.api.services.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 
+
+/*
+This class defines the Controller to find books with different parameters like isbn or price
+*/
 @RestController
 @RequestMapping("/api/books")
 public class BooksController {

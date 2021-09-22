@@ -15,6 +15,9 @@ import de.sunbook.api.models.tablemodels.OrderPartModel;
 import de.sunbook.api.models.tablemodels.UserBookMapModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 
+/*
+This is the Row Mapper for the Query, the results of the Queries are taken by this Row Mapper
+*/
 public class CustomRowMapper {
     public static RowMapper<UserModel> GetUserMapper() {
         return new RowMapper<UserModel>() {

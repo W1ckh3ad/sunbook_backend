@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-
 import com.mysql.jdbc.Driver;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+/*
+This class enables the connection to the database, stores the credentials for the db
+*/
 public class SqlServerConnection {
     private static SqlServerConnection instance;
 
@@ -25,6 +26,7 @@ public class SqlServerConnection {
 
     }
 
+    //get the Instance, Singleton Pattern
     public static SqlServerConnection getInstance() {
         if (instance == null) {
             instance = new SqlServerConnection();
@@ -32,6 +34,7 @@ public class SqlServerConnection {
         return instance;
     }
 
+    //get the Connection
     private JdbcTemplate getConnection() throws SQLException {
         Driver driver = new Driver();
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource(driver, connectionString, user, password);

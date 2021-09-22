@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import de.sunbook.api.models.responsemodels.SellerResponseModel;
 import de.sunbook.api.processors.UserProcessor;
 
+/*
+This is the Service for the Sellers, this class provides the Logic of the Programm, 
+called by the Controllers, find the sellers 
+*/
 @Service
 public class SellerService {
 

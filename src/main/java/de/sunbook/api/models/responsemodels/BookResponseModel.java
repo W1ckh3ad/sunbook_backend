@@ -5,6 +5,9 @@ import java.util.Date;
 import de.sunbook.api.models.tablemodels.BookModel;
 import de.sunbook.api.models.tablemodels.UserModel;
 
+/*
+This class defines the response after a book search with a list of books
+*/
 public class BookResponseModel extends BookModel {
     private UserModel user;
     private String userDescription;

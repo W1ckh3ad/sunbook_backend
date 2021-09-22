@@ -11,6 +11,9 @@ import de.sunbook.api.processors.interfaces.ICrudProcessor;
 import de.sunbook.api.utils.CustomRowMapper;
 import de.sunbook.api.utils.sqlstringbuilder.ExtraProductSqlStringBuilder;
 
+/*
+This is the processor for the sql methods for the extra products
+*/
 @Service
 public class ExtraProductProcessor extends Processor implements ICrudProcessor<ExtraProductModel> {
     ExtraProductSqlStringBuilder sqlStringBuilder;

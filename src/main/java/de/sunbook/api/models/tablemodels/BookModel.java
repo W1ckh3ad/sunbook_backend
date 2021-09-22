@@ -2,6 +2,9 @@ package de.sunbook.api.models.tablemodels;
 
 import java.util.Date;
 
+/*
+This is the model of the Books
+*/
 public class BookModel {
     private Integer uid;
     private String genre;
