@@ -69,7 +69,7 @@ public class UserProcessor extends Processor implements ICrudProcessor<UserModel
     }
 
     public List<UserModel> selectSeller() throws SQLException {
-        String sql = sqlStringBuilder.select() + " AND `role` IN ('admin', 'seller')";
+        String sql = sqlStringBuilder.select() + " WHERE `role` IN ('admin', 'seller')";
         return connection.query(sql, CustomRowMapper.GetUserMapper());
     }
 }

@@ -1,9 +1,11 @@
 package de.sunbook.api.utils;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -46,7 +48,14 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
+        Set<String> roles = userDetails.getAuthorities().stream().map(r -> r.getAuthority())
+                .collect(Collectors.toSet());
         Map<String, Object> claims = new HashMap<>();
+        for (String string : roles) {
+            if (string.indexOf("ROLE_") > -1) {
+                claims.put("role", string.substring(5));
+            }
+        }
         return createToken(claims, userDetails.getUsername());
     }
 

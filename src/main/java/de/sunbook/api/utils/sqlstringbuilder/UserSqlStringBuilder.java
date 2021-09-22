@@ -17,14 +17,14 @@ public class UserSqlStringBuilder extends SqlStringBuilder {
 
     public String insert(UserModel model) {
         var map = new HashMap<String, String>();
-        map.put("email", model.getEmail());
-        map.put("password", model.getPassword());
-        map.put("city", model.getCity());
-        map.put("plz", model.getPlz());
-        map.put("houseNum", model.getHouseNum());
-        map.put("street", model.getStreet());
-        map.put("firstName", model.getFirstName());
-        map.put("lastName", model.getLastName());
+        map.put("email", stringValue(model.getEmail()));
+        map.put("password", stringValue(model.getPassword()));
+        map.put("city", stringValue(model.getCity()));
+        map.put("plz", stringValue(model.getPlz()));
+        map.put("houseNum", stringValue(model.getHouseNum()));
+        map.put("street", stringValue(model.getStreet()));
+        map.put("firstName", stringValue(model.getFirstName()));
+        map.put("lastName", stringValue(model.getLastName()));
         map.put("isActive", "1");
         return insertHelper(map);
     }
