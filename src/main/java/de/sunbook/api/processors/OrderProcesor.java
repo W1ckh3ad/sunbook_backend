@@ -34,7 +34,7 @@ public class OrderProcesor extends Processor {
     }
 
     public OrderModel select(int uid) throws SQLException {
-        var sql = sqlStringBuilder.select();
+        var sql = sqlStringBuilder.select(uid);
         return connection.querySingle(sql, CustomRowMapper.GetOrderModelRowMapper());
     }
 

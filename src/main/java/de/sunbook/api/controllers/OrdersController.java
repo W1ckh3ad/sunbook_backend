@@ -29,7 +29,6 @@ public class OrdersController {
     @Autowired
     private OrderService orderService;
 
-
     @PostMapping
     public ResponseEntity<?> post(@RequestBody OrderRequestModel request) throws Exception, SQLException {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -37,11 +36,11 @@ public class OrdersController {
         return ResponseEntity.ok(response);
     }
 
-    //validates the voucher
+    // validates the voucher
     @GetMapping("/validateVoucher")
     public ResponseEntity<?> validateVoucher(@RequestParam String code) throws SQLException, Exception {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        voucherService.validateVoucher(code, username);
-        return ResponseEntity.ok("code " + code + " is valid");
+        var model = voucherService.validateVoucher(code, username);
+        return ResponseEntity.ok(model);
     }
 }
