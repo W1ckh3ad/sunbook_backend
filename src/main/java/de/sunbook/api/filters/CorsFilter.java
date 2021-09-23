@@ -1,3 +1,5 @@
+package de.sunbook.api.filters;
+
 import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
