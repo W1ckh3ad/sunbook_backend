@@ -45,7 +45,7 @@ public class VoucherService {
         var user = userService.findUserByName(username);
         var model = extraProductProcessor.select(code);
         var receiver = model.getReceiver();
-        if (model == null || model.getUsedAt() != null || (receiver != null && receiver != user.getUserId())) {
+        if (model == null || model.getUsedAt() != null || (receiver != 0 && receiver != user.getUserId())) {
             throw new Exception("Code isnt Valid");
         }
         return model;
